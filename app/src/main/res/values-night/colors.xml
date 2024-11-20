@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors (Adjusted for Dark Theme) -->
+    <color name="colorPrimary">#ff9800</color> <!-- Slightly lighter orange for contrast -->
+    <color name="colorPrimaryLight">#ffc046</color>
+    <color name="colorPrimaryDark">#b46900</color>
+
+    <!-- Accent Colors (Adjusted for Dark Theme) -->
+    <color name="colorAccent">#4da5ff</color> <!-- Lighter blue accent for dark backgrounds -->
+    <color name="colorAccentLight">#82cfff</color>
+
+    <!-- Background and Surface Colors for Dark Theme -->
+    <color name="colorBackground">#121212</color> <!-- Dark background -->
+    <color name="colorSurface">#1e1e1e</color> <!-- Slightly lighter for cards or sheets -->
+
+    <!-- State Colors (Maintain Visibility on Dark Background) -->
+    <color name="colorError">#cf6679</color> <!-- Lightened red for readability -->
+    <color name="colorSuccess">#81c784</color> <!-- Lightened green -->
+
+    <!-- Text Colors (Light Text for Dark Background) -->
+    <color name="colorTextPrimary">#ffffff</color> <!-- Primary text in white -->
+    <color name="colorTextSecondary">#b0b0b0</color> <!-- Secondary text in light gray -->
+
+</resources>

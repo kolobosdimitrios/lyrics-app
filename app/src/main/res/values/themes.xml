@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.LyricsApp" parent="Theme.Material3.DayNight.NoActionBar">
+            <!-- Primary colors -->
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+            <item name="colorOnPrimary">@color/white</item>
+
+            <!-- Secondary/Accent colors -->
+            <item name="colorSecondary">@color/colorAccent</item>
+            <item name="colorSecondaryVariant">@color/colorAccentLight</item>
+            <item name="colorOnSecondary">@color/white</item>
+
+            <!-- Background and surface -->
+            <item name="colorSurface">@color/colorSurface</item> <!-- Used for surfaces like cards -->
+            <item name="android:windowBackground">@color/colorBackground</item> <!-- Background for activity -->
+            <item name="colorOnSurface">@color/colorTextPrimary</item>
+
+            <!-- Error colors -->
+            <item name="colorError">@color/colorError</item>
+            <item name="colorOnError">@color/white</item>
+
+            <!-- Text and icon colors -->
+            <item name="android:textColor">@color/colorTextPrimary</item>
+            <item name="android:textColorHint">@color/colorTextSecondary</item>
+            <item name="colorOnBackground">@color/colorTextPrimary</item>
+
+    </style>
+</resources>

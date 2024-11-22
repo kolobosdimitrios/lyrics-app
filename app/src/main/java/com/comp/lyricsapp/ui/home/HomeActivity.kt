@@ -17,7 +17,7 @@ class HomeActivity : ComponentActivity() {
 
         setContent {
             MyAppTheme {
-
+                //TODO: Make a dashboard!!
             }
         }
 

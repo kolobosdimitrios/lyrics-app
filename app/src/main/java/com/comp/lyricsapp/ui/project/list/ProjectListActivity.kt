@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,6 +41,9 @@ class ProjectListActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+        setContent {
+            ProjectsListScreen()
+        }
     }
 
     override fun onStart() {
@@ -63,7 +67,7 @@ class ProjectListActivity: ComponentActivity() {
     }
 
     @Composable
-    fun HomeScreen(){
+    fun ProjectsListScreen(){
 
         val projectEntities by projectViewModel.projects.collectAsState()
 

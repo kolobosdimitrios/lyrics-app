@@ -24,6 +24,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.comp.lyricsapp.data.model.ProjectEntity
@@ -31,77 +34,98 @@ import com.comp.lyricsapp.ui.theme.MyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : ComponentActivity(){
+class HomeActivity : ComponentActivity() {
 
 
-    private val homeViewModel : HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent{
-            MyAppTheme {
-                HomeScreen()
-            }
-        }
+        setContent {
+            HomeScreen(
 
+            )
+        }
 
 
     }
 
-    private fun createProject(projectEntity: ProjectEntity){
+    private fun createProject(projectEntity: ProjectEntity) {
 
         homeViewModel.createProject(projectEntity)
     }
 
     @Composable
     fun HomeScreen(){
+
         val projectEntities by homeViewModel.projects.collectAsState()
 
-        Box(Modifier.fillMaxSize()){
-            ProjectsList(projectEntities)
-            Button(
-                onClick = {
-                createProject(
-                    ProjectEntity(id = null, title = "Project")
-                )
-                },
-                Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(32.dp)
+        MyAppTheme {
 
-            ) {
-                Icon(Icons.Rounded.Add, "Add new Lyrics Project")
-            }
-        }
-    }
+            Box(Modifier.fillMaxSize()){
+                ProjectsList(projectEntities)
+                Button(
+                    onClick = {
+                        createProject(
+                            ProjectEntity(id = null, title = "Project")
+                        )
+                    },
+                    Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(32.dp)
 
-    @Composable
-    fun ProjectsList(projectEntities: List<ProjectEntity>){
-        LazyColumn {
-            items(projectEntities){ project ->
-                Project(project)
+                ) {
+                    Icon(Icons.Rounded.Add, "Add new Lyrics Project")
+                }
             }
         }
 
     }
-
-    @Composable
-    fun Project(projectEntity: ProjectEntity){
-        val context = LocalContext.current
-        Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start){
-            Text(
-                text = projectEntity.title + " No.${projectEntity.id}",
-                Modifier.padding(16.dp)
-                    .clickable {
-                        Toast.makeText(context, projectEntity.title, Toast.LENGTH_SHORT).show()
-                    }
-            )
-        }
-    }
-
 
 }
+
+@Composable
+fun ProjectsList(projectEntities: List<ProjectEntity>){
+    LazyColumn(
+    ) {
+        items(projectEntities){ project ->
+            ProjectViewHolder(project)
+        }
+    }
+
+}
+
+@Composable
+fun ProjectViewHolder(projectEntity: ProjectEntity){
+    val context = LocalContext.current
+    Row (
+        Modifier.fillMaxWidth()
+            .shadow(
+                elevation = 1.dp,
+                shape = RectangleShape,
+            )
+            .clickable {
+            Toast.makeText(
+                context,
+                "${projectEntity.title} No. ${projectEntity.id}",
+                Toast.LENGTH_SHORT
+            ).show()
+                                          },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ){
+        Text(
+            text = projectEntity.title + " No.${projectEntity.id}",
+            Modifier
+                .padding(16.dp)
+
+        )
+    }
+}
+
+
+
 
 

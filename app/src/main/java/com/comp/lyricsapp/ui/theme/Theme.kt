@@ -6,6 +6,10 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import com.comp.lyricsapp.R
 
 // Light Theme Color Palette
 val LightColorPalette = lightColors(
@@ -35,6 +39,15 @@ val DarkColorPalette = darkColors(
     onBackground = DarkTextPrimary,
     onSurface = DarkTextPrimary,
     onError = Color.Black // black text on error color
+)
+
+val fontFamily = FontFamily(
+    Font( R.font.comic_neue_regular, FontWeight.Normal),
+    Font( R.font.comic_neue_italic, FontWeight.Normal),
+    Font( R.font.comic_neue_light, FontWeight.Light),
+    Font( R.font.comic_neue_light_italic, FontWeight.Light),
+    Font( R.font.comic_neue_bold, FontWeight.Bold),
+    Font( R.font.comic_neue_bold_italic, FontWeight.Bold)
 )
 
 @Composable

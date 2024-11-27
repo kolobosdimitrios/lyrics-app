@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.ui.project.list
+package com.comp.lyricsapp.presentation.ui.project.list
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -29,9 +29,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.comp.lyricsapp.data.model.ProjectEntity
-import com.comp.lyricsapp.ui.project.ProjectViewModel
-import com.comp.lyricsapp.ui.theme.MyAppTheme
+import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.presentation.view_models.ProjectViewModel
+import com.comp.lyricsapp.presentation.ui.theme.MyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -92,7 +92,7 @@ class ProjectListActivity: ComponentActivity() {
     }
 
     @Composable
-    fun ProjectsList(projectEntities: List<ProjectEntity>){
+    fun ProjectsList(projectEntities: List<Project>){
         LazyColumn(
         ) {
             items(projectEntities){ project ->
@@ -103,7 +103,7 @@ class ProjectListActivity: ComponentActivity() {
     }
 
     @Composable
-    fun ProjectViewHolder(projectEntity: ProjectEntity){
+    fun ProjectViewHolder(project: Project){
         val context = LocalContext.current
         Row (
             Modifier.fillMaxWidth()
@@ -114,7 +114,7 @@ class ProjectListActivity: ComponentActivity() {
                 .clickable {
                     Toast.makeText(
                         context,
-                        "${projectEntity.title} No. ${projectEntity.id}",
+                        "${project.title} No. ${project.id}",
                         Toast.LENGTH_SHORT
                     ).show()
                 },
@@ -122,7 +122,7 @@ class ProjectListActivity: ComponentActivity() {
             horizontalArrangement = Arrangement.Start
         ){
             Text(
-                text = projectEntity.title + " No.${projectEntity.id}",
+                text = project.title + " No.${project.id}",
                 Modifier
                     .padding(16.dp)
 

@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.ui.theme
+package com.comp.lyricsapp.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

@@ -3,8 +3,8 @@ package com.comp.lyricsapp.di
 import android.content.Context
 
 import androidx.room.Room
-import com.comp.lyricsapp.data.local.MainDatabase
-import com.comp.lyricsapp.data.local.ProjectDAO
+import com.comp.lyricsapp.data.local.database.MainDatabase
+import com.comp.lyricsapp.data.local.dao.ProjectDAO
 import com.comp.lyricsapp.data.repo.ProjectRepositoryImpl
 import dagger.Module
 import dagger.Provides

@@ -1,8 +1,8 @@
-package com.comp.lyricsapp.ui.project
+package com.comp.lyricsapp.presentation.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.comp.lyricsapp.data.model.ProjectEntity
+import com.comp.lyricsapp.domain.entities.Project
 import com.comp.lyricsapp.data.repo.ProjectRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +16,7 @@ class ProjectViewModel @Inject constructor(
     private val projectRepositoryImpl: ProjectRepositoryImpl
 ) : ViewModel() {
 
-    val projects: StateFlow<List<ProjectEntity>> = projectRepositoryImpl.getAll()
+    val projects: StateFlow<List<Project>> = projectRepositoryImpl.getAll()
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
@@ -24,9 +24,9 @@ class ProjectViewModel @Inject constructor(
         )
 
 
-    fun createProject(projectEntity: ProjectEntity){
+    fun createProject(project: Project){
         viewModelScope.launch {
-            projectRepositoryImpl.create(projectEntity)
+            projectRepositoryImpl.create(project)
         }
     }
 

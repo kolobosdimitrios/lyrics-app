@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.ui.home
+package com.comp.lyricsapp.presentation.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -35,8 +38,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.comp.lyricsapp.R
-import com.comp.lyricsapp.ui.theme.MyAppTheme
-import com.comp.lyricsapp.ui.theme.fontFamily
+import com.comp.lyricsapp.presentation.ui.theme.MyAppTheme
+import com.comp.lyricsapp.presentation.ui.theme.fontFamily
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +67,7 @@ private fun DashBoard(){
 
 }
 
-@Preview(device = "spec:parent=pixel_fold")
+@Preview()
 @Composable
 private fun InfoBoxGrid(){
 
@@ -75,11 +78,22 @@ private fun InfoBoxGrid(){
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalItemSpacing = 8.dp
     ) {
+
         val items = (1..6).map {
             ItemTest("This is an item", "This is a body for that item for test purposes", "Created@13:00")
         }
 
-        items(items) {item ->
+        val myList = listOf(
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00"),
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00"),
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00"),
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00"),
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00"),
+            ItemTest("This is an item from my list", "This is a body for that item for test purposes", "Created@13:00")
+        )
+
+
+        items(myList) {item ->
             InfoBox(
                 backgroundColor1 = colorResource(R.color.colorPrimary),
                 backgroundColor2 = colorResource(R.color.colorPrimaryDark),
@@ -96,7 +110,7 @@ private fun InfoBoxGrid(){
 private fun InfoBox(backgroundColor2: Color, backgroundColor1: Color, header: String, body: String, createdAt: String){
 
     Card(
-        modifier = Modifier.size(150.dp, 200.dp)
+        modifier = Modifier.size(200.dp, 50.dp)
     ){
 
         Box (
@@ -122,15 +136,6 @@ private fun InfoBox(backgroundColor2: Color, backgroundColor1: Color, header: St
                     text = header,
                     fontFamily = fontFamily,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start
-                )
-                Text(
-                    text = body,
-                    fontFamily = fontFamily,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding(3.dp),
                     textAlign = TextAlign.Start
                 )
                 Text(

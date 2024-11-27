@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.ui.theme
+package com.comp.lyricsapp.presentation.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Light Theme Colors

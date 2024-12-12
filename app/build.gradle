@@ -69,4 +69,10 @@ dependencies {
 
     // LiveData
     implementation libs.androidx.lifecycle.livedata.ktx
+
+    // add the following first party dependency
+    implementation(libs.androidx.navigation.compose)
+
+    // Hilt for Jetpack Compose
+    implementation libs.androidx.hilt.navigation.compose
 }

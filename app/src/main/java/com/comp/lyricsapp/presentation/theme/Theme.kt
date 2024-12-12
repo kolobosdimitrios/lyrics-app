@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.presentation.ui.theme
+package com.comp.lyricsapp.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

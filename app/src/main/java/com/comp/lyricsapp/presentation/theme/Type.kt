@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.presentation.ui.theme
+package com.comp.lyricsapp.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

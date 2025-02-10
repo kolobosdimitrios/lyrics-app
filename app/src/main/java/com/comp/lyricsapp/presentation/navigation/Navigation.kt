@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.comp.lyricsapp.presentation.view.home_screen.HomeScreen
-import com.comp.lyricsapp.presentation.view.project_list.ProjectsScreen
 import com.comp.lyricsapp.presentation.view_models.ProjectViewModel
 
 
@@ -21,11 +20,6 @@ fun Navigation(){
          */
         composable(route = Screen.Home.route){
             HomeScreen(navController)
-        }
-
-        composable(route = Screen.ProjectsList.route){
-            val projectViewModel : ProjectViewModel = hiltViewModel()
-            ProjectsScreen(projectViewModel = projectViewModel)
         }
 
     }

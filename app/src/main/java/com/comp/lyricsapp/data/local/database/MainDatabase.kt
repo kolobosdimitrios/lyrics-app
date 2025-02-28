@@ -3,11 +3,11 @@ package com.comp.lyricsapp.data.local.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.comp.lyricsapp.data.local.dao.ProjectDAO
-import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.data.model.ProjectDto
 
 @Database(
     entities = [
-        Project::class
+        ProjectDto::class
     ],
     version = 2,
     exportSchema = false

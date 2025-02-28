@@ -3,7 +3,7 @@ package com.comp.lyricsapp.presentation.view_models
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.comp.lyricsapp.domain.entities.Project
-import com.comp.lyricsapp.data.repo.ProjectRepositoryImpl
+import com.comp.lyricsapp.data.local.repo.LocalProjectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProjectViewModel @Inject constructor(
-    private val projectRepositoryImpl: ProjectRepositoryImpl
+    private val projectRepositoryImpl: LocalProjectRepository
 ) : ViewModel() {
 
     val projects: StateFlow<List<Project>> = projectRepositoryImpl.getAll()

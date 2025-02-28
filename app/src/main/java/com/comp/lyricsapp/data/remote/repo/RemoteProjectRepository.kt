@@ -1,14 +1,12 @@
-package com.comp.lyricsapp.data.repo
+package com.comp.lyricsapp.data.remote.repo
 
-import com.comp.lyricsapp.data.local.repo.LocalProjectRepository
-import com.comp.lyricsapp.data.remote.repo.RemoteProjectRepository
+import com.comp.lyricsapp.data.remote.api.ProjectApi
 import com.comp.lyricsapp.domain.entities.Project
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 
-class ProjectRepositoryImpl(
-    private val localProjectRepository: LocalProjectRepository,
-    private val remoteProjectRepository: RemoteProjectRepository
+class RemoteProjectRepository(
+    private val api: ProjectApi
 ): ProjectRepository {
 
     override fun getAll(): Flow<List<Project>> {

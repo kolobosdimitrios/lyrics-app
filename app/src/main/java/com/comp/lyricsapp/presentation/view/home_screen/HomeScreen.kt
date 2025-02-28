@@ -34,39 +34,6 @@ fun HomeScreen(navController: NavController) {
                     }
                 )
             },
-            bottomBar = {
-                BottomAppBar(
-                    contentColor = MaterialTheme.colors.onSecondary,
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceAround,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(15.dp)
-                    ) {
-                        Text(
-                            modifier = Modifier.clickable {
-
-                            },
-                            text = "Button 1",
-                        )
-
-                        Text(
-                            modifier = Modifier.clickable {
-
-                            },
-                            text = "Button 2",
-                        )
-                        Text(
-                            modifier = Modifier.clickable {
-
-                            },
-                            text = "Button 3",
-                        )
-
-                    }
-                }
-            },
             floatingActionButton = {
                 FloatingActionButton(
                     backgroundColor = MaterialTheme.colors.primary,

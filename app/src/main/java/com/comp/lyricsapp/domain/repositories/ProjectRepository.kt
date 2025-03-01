@@ -7,7 +7,9 @@ interface ProjectRepository {
 
     fun getAll() : Flow<List<Project>>
 
-    suspend fun get(id: Long) : Project
+    suspend fun get(id: Long) : Flow<Project?>
+
+    suspend fun update(updatedProject: Project)
 
     suspend fun deleteAll()
 

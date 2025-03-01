@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.comp.lyricsapp.data.model.ProjectDto
 import kotlinx.coroutines.flow.Flow
 
@@ -14,10 +15,13 @@ interface ProjectDAO {
     fun getAllProjects() : Flow<List<ProjectDto>>
 
     @Query("SELECT * FROM project_table WHERE id = :projectId")
-    suspend fun getProject(projectId: Long) : ProjectDto
+    fun getProject(projectId: Long) : Flow<ProjectDto?>
 
     @Insert
     suspend fun saveProject(project: ProjectDto)
+
+    @Update
+    suspend fun updateProject(updatedProjectDto: ProjectDto)
 
     @Query("DELETE FROM project_table")
     suspend fun deleteAllProjects()

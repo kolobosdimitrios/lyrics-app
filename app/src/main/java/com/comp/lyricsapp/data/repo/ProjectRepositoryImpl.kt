@@ -12,22 +12,27 @@ class ProjectRepositoryImpl(
 ): ProjectRepository {
 
     override fun getAll(): Flow<List<Project>> {
-        TODO("Not yet implemented")
+
+        return localProjectRepository.getAll()
     }
 
-    override suspend fun get(id: Long): Project {
-        TODO("Not yet implemented")
+    override suspend fun get(id: Long): Flow<Project?> {
+        return localProjectRepository.get(id)
+    }
+
+    override suspend fun update(updatedProject: Project) {
+        localProjectRepository.update(updatedProject)
     }
 
     override suspend fun deleteAll() {
-        TODO("Not yet implemented")
+        localProjectRepository.deleteAll()
     }
 
     override suspend fun delete(project: Project) {
-        TODO("Not yet implemented")
+        localProjectRepository.delete(project)
     }
 
     override suspend fun create(project: Project) {
-        TODO("Not yet implemented")
+        localProjectRepository.create(project)
     }
 }

@@ -13,7 +13,11 @@ class RemoteProjectRepository(
         TODO("Not yet implemented")
     }
 
-    override suspend fun get(id: Long): Project {
+    override suspend fun get(id: Long): Flow<Project?> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun update(updatedProject: Project) {
         TODO("Not yet implemented")
     }
 

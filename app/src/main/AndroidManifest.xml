@@ -14,7 +14,7 @@
         android:theme="@style/Theme.LyricsApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.view.HomeActivity"
+            android:name=".presentation.screens.HomeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.LyricsApp">

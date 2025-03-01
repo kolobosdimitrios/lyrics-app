@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.presentation.view.home_screen
+package com.comp.lyricsapp.presentation.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

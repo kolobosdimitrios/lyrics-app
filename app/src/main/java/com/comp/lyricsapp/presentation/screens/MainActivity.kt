@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.presentation.view
+package com.comp.lyricsapp.presentation.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

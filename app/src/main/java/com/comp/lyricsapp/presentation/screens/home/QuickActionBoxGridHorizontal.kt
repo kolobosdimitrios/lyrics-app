@@ -1,4 +1,4 @@
-package com.comp.lyricsapp.presentation.view.home_screen
+package com.comp.lyricsapp.presentation.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

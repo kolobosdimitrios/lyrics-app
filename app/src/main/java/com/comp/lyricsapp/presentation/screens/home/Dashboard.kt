@@ -1,9 +1,7 @@
-package com.comp.lyricsapp.presentation.view.home_screen
+package com.comp.lyricsapp.presentation.screens.home
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.comp.lyricsapp.R
-import com.comp.lyricsapp.presentation.navigation.Screen
 
 @Composable
 fun DashBoard(navController: NavController){

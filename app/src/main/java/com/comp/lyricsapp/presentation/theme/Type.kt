@@ -20,7 +20,8 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
         shadow = Shadow(
-            color = Color.Black,
+            color = Color.DarkGray,
+
         )
     )
 

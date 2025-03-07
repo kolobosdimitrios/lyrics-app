@@ -1,6 +1,9 @@
 package com.comp.lyricsapp.presentation.screens.project
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -14,6 +17,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +31,9 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.comp.lyricsapp.presentation.theme.Typography
 
 @Composable
 fun ProjectScreen(navController: NavController){
@@ -47,21 +53,33 @@ fun ProjectScreen(navController: NavController){
                         modifier = Modifier.fillMaxWidth().focusRequester(focusRequester),
                         value = projectTitle,
                         onValueChange = { newValue -> projectTitle = newValue},
-                        placeholder = { Text("Project Title") },
+                        placeholder = { Text("Project Title", style = Typography.h1) },
                         singleLine = true,
-                        textStyle = TextStyle(color = Color.White),
+                        textStyle = Typography.h1,
                         keyboardOptions = KeyboardOptions.Default.copy(
                             imeAction = ImeAction.Done  // Set Done button on keyboard
                         ),
                         trailingIcon = {
-                            IconButton(
-                                onClick = {
-                                    focusRequester.requestFocus()  // Move focus to TextField
-                                    keyboardController?.show()
+
+                            Row(){
+                                IconButton(
+                                    onClick = {
+                                        focusRequester.requestFocus()  // Move focus to TextField
+                                        keyboardController?.show()
+                                    }
+                                ) {
+                                    Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Title")
                                 }
-                            ) {
-                                Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Title", tint = Color.White)
+
+                                IconButton(
+                                    onClick = {
+                                        //Save project!!
+                                    }
+                                ) {
+                                    Icon(imageVector = Icons.Default.Save, contentDescription = "Save Title")
+                                }
                             }
+
                         },
                         colors = TextFieldDefaults.textFieldColors(
                             backgroundColor = Color.Transparent,

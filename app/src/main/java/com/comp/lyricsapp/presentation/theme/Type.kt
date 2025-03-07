@@ -17,12 +17,13 @@ val Typography = Typography(
     ),
     body2 = TextStyle(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 18.sp,
-        shadow = Shadow(
-            color = Color.DarkGray,
-
-        )
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp
+    ),
+    h1 = TextStyle(
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp
     )
 
     /* Other default text styles to override

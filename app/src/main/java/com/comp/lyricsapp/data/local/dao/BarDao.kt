@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.comp.lyricsapp.data.model.BarDto
 import com.comp.lyricsapp.data.model.LineDto
 import com.comp.lyricsapp.data.model.relations.BarWithLinesRelationEntity
@@ -21,6 +22,17 @@ interface BarDao {
     @Transaction
     @Query("SELECT * FROM bars WHERE id = :barId")
     fun getBarWithLines(barId: Long) : Flow<BarWithLinesRelationEntity>
+
+    @Update
+    suspend fun updateBar(updatedBar: BarDto)
+
+    @Transaction
+    @Query("DELETE  FROM bars WHERE projectId = :projectId AND id in (:barIds)")
+    suspend fun deleteProjectBars(projectId: Long, barIds: List<Long>)
+
+    @Transaction
+    @Query("DELETE FROM BARS WHERE projectId = :projectId")
+    suspend fun deleteAllProjectBars(projectId: Long)
 
 
 

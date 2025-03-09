@@ -1,53 +1,81 @@
 package com.comp.lyricsapp.domain.usecases
 
-import com.comp.lyricsapp.data.local.dao.BarDao
+import com.comp.lyricsapp.data.repo.BarRepositoryImpl
 import com.comp.lyricsapp.domain.entities.Bar
 import com.comp.lyricsapp.domain.entities.Line
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 data class ProjectBarIds(val projectId: Long, val barId: Long)
 
-abstract sealed class BarUseCases<I, O>(protected val barDao: BarDao){
-    abstract operator fun invoke(input: I): O
-}
+abstract sealed class BarUseCases<I, O>(protected val repository: BarRepositoryImpl){
+    protected abstract suspend fun invokeSuspend(input: I): O
+    protected abstract fun invokeSync(input: I): O
 
-class CreateBar(barDao: BarDao): BarUseCases<Bar, Unit>(barDao){
-    override fun invoke(newBar: Bar) {
-        TODO("Not yet implemented")
+    operator fun invoke(input: I, async: Boolean = true): O {
+        return if(async) runBlocking { invokeSuspend(input) } else invokeSync(input)
     }
 }
 
-class UpdateBar(barDao: BarDao): BarUseCases<Bar, Unit>(barDao){
-    override fun invoke(updatedBar: Bar) {
-        TODO("Not yet implemented")
+class CreateBar(repository: BarRepositoryImpl): BarUseCases<Bar, Unit>(repository){
+    override suspend fun invokeSuspend(input: Bar) {
+        repository.createBar(input)
     }
 
-}
-
-class DeleteBar(barDao: BarDao): BarUseCases<Bar, Unit>(barDao){
-    override fun invoke(deletedBar: Bar) {
-        TODO("Not yet implemented")
+    override fun invokeSync(input: Bar) {
+        throw IllegalStateException("Creation is a suspend operation!")
     }
 
 }
 
-class DeleteProjectBar(barDao: BarDao): BarUseCases<ProjectBarIds, Unit>(barDao){
-    override fun invoke(projectBarIds: ProjectBarIds) {
-        TODO("Not yet implemented")
+class UpdateBar(repository: BarRepositoryImpl): BarUseCases<Bar, Unit>(repository){
+    override suspend fun invokeSuspend(input: Bar) {
+        repository.updateBar(input)
+    }
+
+    override fun invokeSync(input: Bar) {
+        throw IllegalStateException("Update is a suspend operation!")
+    }
+
+
+}
+
+class DeleteProjectBar(repository: BarRepositoryImpl): BarUseCases<ProjectBarIds, Unit>(repository){
+
+    override suspend fun invokeSuspend(input: ProjectBarIds) {
+        repository.deleteProjectBars(
+            projectId = input.projectId,
+            projectBarIds = listOf(input.barId)
+        )
+    }
+
+    override fun invokeSync(input: ProjectBarIds) {
+        throw IllegalStateException("Delete is a suspend operation!")
     }
 
 }
 
-class DeleteProjectBars(barDao: BarDao): BarUseCases<Long, Unit>(barDao){
-    override fun invoke(projectId: Long) {
-        TODO("Not yet implemented")
+class DeleteProjectBars(repository: BarRepositoryImpl): BarUseCases<Long, Unit>(repository){
+    override suspend fun invokeSuspend(input: Long) {
+        repository.deleteAllProjectBars(input)
     }
+
+    override fun invokeSync(input: Long) {
+        throw IllegalStateException("Delete is a suspend operation!")
+    }
+
 
 }
 
-class GetBarLinesUseCase(barDao: BarDao): BarUseCases<Long, Flow<List<Line>>>(barDao){
-    override fun invoke(barId: Long): Flow<List<Line>> {
-        TODO("Not yet implemented")
+class GetBarLinesUseCase(repository: BarRepositoryImpl): BarUseCases<Long, Flow<List<Line>>>(repository){
+    override suspend fun invokeSuspend(input: Long): Flow<List<Line>> {
+        throw IllegalStateException("Delete is not a suspend operation!")
     }
+
+    override fun invokeSync(input: Long): Flow<List<Line>> {
+        return repository.getBarWithLines(input).map { it.lines }
+    }
+
 
 }

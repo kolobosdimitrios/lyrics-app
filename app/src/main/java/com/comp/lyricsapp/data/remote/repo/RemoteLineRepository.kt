@@ -7,12 +7,15 @@ import kotlinx.coroutines.flow.Flow
 
 class RemoteLineRepository(private val lineApi: LineApi): LineRepository {
 
-
-    override suspend fun updateLine(newLine: Line) {
+    override suspend fun insertLine(newLine: Line) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteBarLines(barId: Long, barLines: List<Line>) {
+    override suspend fun updateLine(updatedLine: Line) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteBarLines(barId: Long, barLines: List<Long>) {
         TODO("Not yet implemented")
     }
 

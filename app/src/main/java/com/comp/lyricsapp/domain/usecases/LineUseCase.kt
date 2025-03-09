@@ -1,71 +1,56 @@
 package com.comp.lyricsapp.domain.usecases
 
-import com.comp.lyricsapp.data.local.dao.LineDao
+import com.comp.lyricsapp.data.repo.LineRepositoryImpl
 import com.comp.lyricsapp.domain.entities.Line
+import kotlinx.coroutines.runBlocking
 
 data class BarLineIds(val barId: Long, val lineId: Long )
 
-sealed abstract class LineUseCase<I,T>(protected val lineDao: LineDao) {
-    suspend operator abstract fun invoke(input: I): T
+sealed abstract class LineUseCase<I,O>(protected val repository: LineRepositoryImpl) {
+    protected abstract suspend fun invokeSuspend(input: I): O
+    protected abstract fun invokeSync(input: I): O
+
+    operator fun invoke(input: I, async: Boolean = true): O {
+        return if(async) runBlocking { invokeSuspend(input) } else invokeSync(input)
+    }
 }
 
 
-class CreateLinesUseCase(lineDao: LineDao): LineUseCase<List<Line>, Unit>(lineDao) {
+class CreateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
 
-    override suspend fun invoke(newLines: List<Line>) {
-        TODO("Not yet implemented")
+    override suspend fun invokeSuspend(input: Line) {
+        repository.createLine(input)
+    }
+
+    override fun invokeSync(input: Line) {
+        throw IllegalStateException("Creation is a suspended operation.")
     }
 
 }
 
-class CreateLineUseCase(lineDao: LineDao): LineUseCase<Line, Unit>(lineDao) {
+class UpdateLine(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
 
-    override suspend fun invoke(newLine: Line) {
-        TODO("Not yet implemented")
+    override suspend fun invokeSuspend(input: Line) {
+        repository.updateLine(input)
     }
 
-}
-
-
-class GetLinesUseCase(lineDao: LineDao):LineUseCase<Long, List<Line>>(lineDao) {
-
-    override suspend fun invoke(barId: Long): List<Line> {
-        TODO("Not yet implemented")
+    override fun invokeSync(input: Line) {
+        throw IllegalStateException("Update is a suspended operation.")
     }
 }
 
-class GetLineUseCase(lineDao: LineDao): LineUseCase<Long, Line>(lineDao){
-    override suspend fun invoke(lineId: Long): Line {
-        TODO("Not yet implemented")
+
+class DeleteBarLine(repository: LineRepositoryImpl): LineUseCase<BarLineIds ,Unit>(repository){
+    override suspend fun invokeSuspend(input: BarLineIds) {
+        repository.deleteBarLines(
+            input.barId,
+            listOf(input.lineId)
+        )
     }
 
-}
-
-class UpdateLine(lineDao: LineDao): LineUseCase<Line, Unit>(lineDao) {
-
-    override suspend fun invoke(updatedLine: Line) {
-        TODO("Not yet implemented")
-    }
-}
-
-class DeleteLine(lineDao: LineDao): LineUseCase<Long, Unit>(lineDao) {
-
-    override suspend fun invoke(lineId: Long) {
-        TODO("Not yet implemented")
-    }
-}
-
-class DeleteBarLines(lineDao: LineDao): LineUseCase<Long, Unit>(lineDao){
-    override suspend fun invoke(barId: Long) {
-        TODO("Not yet implemented")
+    override fun invokeSync(input: BarLineIds) {
+        throw IllegalStateException("Deletion is a suspended operation.")
     }
 
-}
-
-
-class DeleteBarLine(lineDao: LineDao): LineUseCase<BarLineIds ,Unit>(lineDao){
-    override suspend fun invoke(barLineIds: BarLineIds) {
-        TODO("Not yet implemented")
-    }
 
 }

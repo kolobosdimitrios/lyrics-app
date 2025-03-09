@@ -16,8 +16,8 @@ class ProjectRepositoryImpl(
         return localProjectRepository.getAll()
     }
 
-    override suspend fun get(id: Long): Flow<Project?> {
-        return localProjectRepository.get(id)
+    override suspend fun getProjectWithBars(id: Long): Flow<Project?> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun update(updatedProject: Project) {

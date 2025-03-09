@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.comp.lyricsapp.data.model.ProjectDto
+import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -28,4 +30,8 @@ interface ProjectDAO {
 
     @Delete
     suspend fun deleteProject(project: ProjectDto)
+
+    @Transaction
+    @Query("SELECT * FROM BARS WHERE projectId = :projectId")
+    fun getProjectWithBars(projectId: Long): Flow<ProjectWithBarsRelationEntity>
 }

@@ -18,10 +18,8 @@ class LocalProjectRepository(private val projectDao: ProjectDAO): ProjectReposit
             .map { it.map { dto -> dto.toEntity() } }
     }
 
-    override suspend fun get(id: Long): Flow<Project?> {
-        return projectDao.getProject(id)
-            .catch { error -> error.message?.let { Log.e("LocalProjectRepository", it) } }
-            .map { it?.toEntity() }
+    override suspend fun getProjectWithBars(id: Long): Flow<Project?> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun update(updatedProject: Project) {

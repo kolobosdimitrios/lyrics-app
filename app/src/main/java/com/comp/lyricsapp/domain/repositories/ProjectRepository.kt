@@ -7,7 +7,7 @@ interface ProjectRepository {
 
     fun getAll() : Flow<List<Project>>
 
-    suspend fun get(id: Long) : Flow<Project?>
+    suspend fun getProjectWithBars(id: Long) : Flow<Project?>
 
     suspend fun update(updatedProject: Project)
 

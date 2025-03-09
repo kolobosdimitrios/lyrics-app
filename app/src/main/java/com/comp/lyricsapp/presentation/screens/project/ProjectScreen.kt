@@ -102,9 +102,7 @@ fun ProjectScreen(navController: NavController){
         Box(
             modifier = Modifier.padding(innerPadding)
         ) {
-            Text(
-                text = "The name of the project will be ${savedProjectTitle}!"
-            )
+
         }
     }
 }

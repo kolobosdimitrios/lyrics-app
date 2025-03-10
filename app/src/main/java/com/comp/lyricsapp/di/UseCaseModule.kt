@@ -55,8 +55,8 @@ object UseCasesModule {
     @Singleton
     fun provideBarUseCases(repository: BarRepositoryImpl): BarUseCasesContainer {
         return BarUseCasesContainer(
-            createBar = CreateBar(repository),
-            updateBar = UpdateBar(repository),
+            createBarUseCase = CreateBar(repository),
+            updateBarUseCase = UpdateBar(repository),
             deleteProjectBar = DeleteProjectBar(repository),
             deleteProjectBars = DeleteProjectBars(repository),
             getBarLinesUseCase = GetBarLinesUseCase(repository)

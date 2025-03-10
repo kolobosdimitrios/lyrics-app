@@ -2,6 +2,7 @@ package com.comp.lyricsapp.data.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 
@@ -14,7 +15,8 @@ import androidx.room.PrimaryKey
             childColumns = ["projectId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index("projectId")]
 )
 data class BarDto(
     @PrimaryKey(autoGenerate = true)

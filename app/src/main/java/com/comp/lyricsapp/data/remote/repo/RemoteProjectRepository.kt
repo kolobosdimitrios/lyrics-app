@@ -1,5 +1,6 @@
 package com.comp.lyricsapp.data.remote.repo
 
+import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import com.comp.lyricsapp.data.remote.api.ProjectApi
 import com.comp.lyricsapp.domain.entities.Project
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
@@ -13,7 +14,7 @@ class RemoteProjectRepository(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getProjectWithBars(id: Long): Flow<Project?> {
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
         TODO("Not yet implemented")
     }
 

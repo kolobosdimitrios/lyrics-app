@@ -1,10 +1,14 @@
 package com.comp.lyricsapp.data.repo
 
 import com.comp.lyricsapp.data.local.repo.LocalProjectRepository
+import com.comp.lyricsapp.data.mapper.toDomainEntity
+import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import com.comp.lyricsapp.data.remote.repo.RemoteProjectRepository
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class ProjectRepositoryImpl(
     private val localProjectRepository: LocalProjectRepository,
@@ -16,8 +20,8 @@ class ProjectRepositoryImpl(
         return localProjectRepository.getAll()
     }
 
-    override suspend fun getProjectWithBars(id: Long): Flow<Project?> {
-        TODO("Not yet implemented")
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
+        return localProjectRepository.getProjectWithBars(id)
     }
 
     override suspend fun update(updatedProject: Project) {

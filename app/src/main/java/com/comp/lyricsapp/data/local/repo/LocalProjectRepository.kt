@@ -4,7 +4,10 @@ import android.util.Log
 import com.comp.lyricsapp.data.local.dao.ProjectDAO
 import com.comp.lyricsapp.data.mapper.toDto
 import com.comp.lyricsapp.data.mapper.toEntity
+import com.comp.lyricsapp.data.mapper.toRelationEntity
+import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -18,8 +21,8 @@ class LocalProjectRepository(private val projectDao: ProjectDAO): ProjectReposit
             .map { it.map { dto -> dto.toEntity() } }
     }
 
-    override suspend fun getProjectWithBars(id: Long): Flow<Project?> {
-        TODO("Not yet implemented")
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
+        return projectDao.getProjectWithBars(id).map { it.toRelationEntity() }
     }
 
     override suspend fun update(updatedProject: Project) {

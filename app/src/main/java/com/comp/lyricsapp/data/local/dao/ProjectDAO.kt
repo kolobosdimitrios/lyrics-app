@@ -8,6 +8,7 @@ import androidx.room.Transaction
 import androidx.room.Update
 import com.comp.lyricsapp.data.model.ProjectDto
 import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -33,5 +34,5 @@ interface ProjectDAO {
 
     @Transaction
     @Query("SELECT * FROM BARS WHERE projectId = :projectId")
-    fun getProjectWithBars(projectId: Long): Flow<ProjectWithBarsRelationEntity>
+    fun getProjectWithBars(projectId: Long): Flow<ProjectWithBars>
 }

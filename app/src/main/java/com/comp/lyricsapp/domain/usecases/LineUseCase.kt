@@ -28,7 +28,7 @@ class CreateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>
 
 }
 
-class UpdateLine(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
+class UpdateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
 
     override suspend fun invokeSuspend(input: Line) {
         repository.updateLine(input)
@@ -40,7 +40,7 @@ class UpdateLine(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(reposi
 }
 
 
-class DeleteBarLine(repository: LineRepositoryImpl): LineUseCase<BarLineIds ,Unit>(repository){
+class DeleteBarLineUseCase(repository: LineRepositoryImpl): LineUseCase<BarLineIds ,Unit>(repository){
     override suspend fun invokeSuspend(input: BarLineIds) {
         repository.deleteBarLines(
             input.barId,

@@ -20,29 +20,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    @Provides
     @Singleton
-    @Provides
-    fun getDatabaseInstance(@ApplicationContext context: Context) : MainDatabase {
+    fun provideContext(@ApplicationContext context: Context): Context = context
 
-        return Room.databaseBuilder(context, MainDatabase::class.java, "main_database")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
 
-    @Provides
-    fun provideProjectDao(mainDatabase: MainDatabase) : ProjectDAO {
-        return mainDatabase.projectDAO()
-    }
 
     @Singleton
     @Provides
     fun provideLocalProjectRepository(projectDAO: ProjectDAO) : LocalProjectRepository {
         return LocalProjectRepository(projectDAO)
     }
-    @Provides
-    fun provideProjectApi(): ProjectApi {
-        return object : ProjectApi{ }
-    }
+
 
     @Singleton
     @Provides

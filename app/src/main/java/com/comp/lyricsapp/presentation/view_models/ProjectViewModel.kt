@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.comp.lyricsapp.domain.entities.Project
 import com.comp.lyricsapp.data.local.repo.LocalProjectRepository
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
+import com.comp.lyricsapp.domain.usecases.ProjectUseCasesContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -17,50 +19,51 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProjectViewModel @Inject constructor(
-    private val projectRepositoryImpl: LocalProjectRepository
+    private val projectUseCases: ProjectUseCasesContainer
 ) : ViewModel() {
 
-    val projectsList: StateFlow<List<Project>> = projectRepositoryImpl.getAll()
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptyList()
-        )
+    val projectsList: StateFlow<List<Project>> = projectUseCases.getAllProjectsUseCase(
+        Unit,
+        async = false
+    ).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        emptyList()
+    )
 
-    private val _selectedProject = MutableStateFlow<Project?>(null)  // Holds the selected project
-    val selectedProject: StateFlow<Project?> = _selectedProject.asStateFlow()
+    private val _selectedProject = MutableStateFlow<ProjectWithBars?>(null)  // Holds the selected project
+    val selectedProjectWithBars: StateFlow<ProjectWithBars?> = _selectedProject.asStateFlow()
 
-    fun getProject(projectId: Long) {
+    fun getProjectWithBars(projectId: Long) {
         viewModelScope.launch {
-            projectRepositoryImpl.get(projectId)
-                .catch { error -> error.message?.let { Log.e("ProjectViewModel", it) } }
-                .collect { project ->
-                    _selectedProject.value = project  // Updates StateFlow
+            projectUseCases.getProjectWithBarsUseCase(projectId, false)
+                .catch { e ->
+                    Log.e("ProjectViewModel", "Error fetching project: ${e.message}")
+                    _selectedProject.value = null
+                }
+                .collect{
+                    projectWithBars -> _selectedProject.value = projectWithBars
                 }
         }
     }
 
     fun createProject(project: Project){
         viewModelScope.launch {
-            projectRepositoryImpl.create(project)
+            projectUseCases.createProjectUseCase(project, true)
+
         }
     }
 
-    fun deleteProjects() {
-        viewModelScope.launch {
-            projectRepositoryImpl.deleteAll()
-        }
-    }
 
     fun deleteProject(project: Project){
         viewModelScope.launch {
-            projectRepositoryImpl.delete(project)
+            projectUseCases.deleteProjectUseCase(project, true)
         }
     }
 
     fun updateProject(updatedProject: Project) {
         viewModelScope.launch {
-            projectRepositoryImpl.update(updatedProject)
+            projectUseCases.updateProjectUseCase(updatedProject)
         }
     }
 

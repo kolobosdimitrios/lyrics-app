@@ -34,5 +34,5 @@ interface ProjectDAO {
 
     @Transaction
     @Query("SELECT * FROM BARS WHERE projectId = :projectId")
-    fun getProjectWithBars(projectId: Long): Flow<ProjectWithBars>
+    fun getProjectWithBars(projectId: Long): Flow<ProjectWithBarsRelationEntity>
 }

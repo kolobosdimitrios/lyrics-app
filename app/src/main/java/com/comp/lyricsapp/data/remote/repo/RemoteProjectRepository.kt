@@ -3,6 +3,7 @@ package com.comp.lyricsapp.data.remote.repo
 import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import com.comp.lyricsapp.data.remote.api.ProjectApi
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -14,7 +15,7 @@ class RemoteProjectRepository(
         TODO("Not yet implemented")
     }
 
-    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBars> {
         TODO("Not yet implemented")
     }
 

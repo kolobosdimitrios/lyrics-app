@@ -3,6 +3,7 @@ package com.comp.lyricsapp.domain.usecases
 import com.comp.lyricsapp.data.model.relations.ProjectWithBarsRelationEntity
 import com.comp.lyricsapp.data.repo.ProjectRepositoryImpl
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 
@@ -15,7 +16,7 @@ abstract sealed class ProjectUseCase<I,O>(protected val repository: ProjectRepos
     }
 }
 
-class UpdateProjectUSeCase(repository: ProjectRepositoryImpl): ProjectUseCase<Project, Unit>(repository){
+class UpdateProjectUseCase(repository: ProjectRepositoryImpl): ProjectUseCase<Project, Unit>(repository){
     override suspend fun invokeSuspend(input: Project) {
         repository.update(input)
     }
@@ -65,13 +66,13 @@ class GetAllProjectsUseCase(repository: ProjectRepositoryImpl): ProjectUseCase<U
 
 }
 
-class GetProjectWithBars(repository: ProjectRepositoryImpl): ProjectUseCase<Long, Flow<ProjectWithBarsRelationEntity>>(repository){
+class GetProjectWithBarsUseCase(repository: ProjectRepositoryImpl): ProjectUseCase<Long, Flow<ProjectWithBars>>(repository){
 
-    override suspend fun invokeSuspend(input: Long): Flow<ProjectWithBarsRelationEntity> {
+    override suspend fun invokeSuspend(input: Long): Flow<ProjectWithBars> {
         throw IllegalStateException("Get is not a suspended operation")
     }
 
-    override fun invokeSync(input: Long): Flow<ProjectWithBarsRelationEntity> {
+    override fun invokeSync(input: Long): Flow<ProjectWithBars> {
         return repository.getProjectWithBars(input)
     }
 

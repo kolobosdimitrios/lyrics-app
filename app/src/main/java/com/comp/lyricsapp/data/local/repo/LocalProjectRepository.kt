@@ -2,6 +2,7 @@ package com.comp.lyricsapp.data.local.repo
 
 import android.util.Log
 import com.comp.lyricsapp.data.local.dao.ProjectDAO
+import com.comp.lyricsapp.data.mapper.toDomainEntity
 import com.comp.lyricsapp.data.mapper.toDto
 import com.comp.lyricsapp.data.mapper.toEntity
 import com.comp.lyricsapp.data.mapper.toRelationEntity
@@ -21,8 +22,8 @@ class LocalProjectRepository(private val projectDao: ProjectDAO): ProjectReposit
             .map { it.map { dto -> dto.toEntity() } }
     }
 
-    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
-        return projectDao.getProjectWithBars(id).map { it.toRelationEntity() }
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBars> {
+        return projectDao.getProjectWithBars(id).map { it.toDomainEntity() }
     }
 
     override suspend fun update(updatedProject: Project) {

@@ -20,7 +20,7 @@ class ProjectRepositoryImpl(
         return localProjectRepository.getAll()
     }
 
-    override fun getProjectWithBars(id: Long): Flow<ProjectWithBarsRelationEntity> {
+    override fun getProjectWithBars(id: Long): Flow<ProjectWithBars> {
         return localProjectRepository.getProjectWithBars(id)
     }
 

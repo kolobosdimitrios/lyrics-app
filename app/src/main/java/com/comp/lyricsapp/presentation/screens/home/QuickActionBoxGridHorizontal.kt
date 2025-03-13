@@ -22,9 +22,7 @@ fun QuickActionBoxGridHorizontal(quickActions: List<QuickAction>, innerPadding: 
     ) {
 
         items(quickActions) {quickAction ->
-            QuickActionBox(
-               quickAction = quickAction
-            ) //Render info boxes with data
+            //Render info boxes with data
         }
     }
 

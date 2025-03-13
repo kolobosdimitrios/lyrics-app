@@ -8,7 +8,7 @@ interface LineRepository {
 
     suspend fun updateLine(updatedLine: Line)
 
-    suspend fun deleteBarLines(barId: Long, barLines: List<Long>)
+    suspend fun deleteBarLines(barLines: List<Line>)
 
     suspend fun createLine(newLine: Line)
 }

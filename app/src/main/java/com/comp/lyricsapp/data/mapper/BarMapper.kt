@@ -18,13 +18,13 @@ fun Bar.toDto() : BarDto{
 fun BarWithLinesRelationEntity.toDomainEntity() : BarWithLines{
     return BarWithLines(
         bar = this.bar.toEntity(),
-        lines = this.lines.map { it.toEntity() }
+        barLines = this.barLines.map { it.toEntity() }
     )
 }
 
 fun BarWithLines.toRelationEntity() : BarWithLinesRelationEntity{
     return BarWithLinesRelationEntity(
         bar = this.bar.toDto(),
-        lines = this.lines.map { it.toDto() }
+        barLines = this.barLines.map { it.toDto() }
     )
 }

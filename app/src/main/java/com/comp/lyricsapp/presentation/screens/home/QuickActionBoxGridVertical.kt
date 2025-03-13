@@ -9,9 +9,11 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.comp.lyricsapp.domain.entities.Project
 
 @Composable
-fun QuickActionBoxGridVertical(quickActions: List<QuickAction>){
+fun QuickActionBoxGridVertical(navController: NavController, projects: List<Project>){
 
     LazyVerticalStaggeredGrid(
 
@@ -21,10 +23,14 @@ fun QuickActionBoxGridVertical(quickActions: List<QuickAction>){
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
 
-        items(quickActions) {quickAction ->
+        items(projects) {project ->
+             //Render info boxes with data
             QuickActionBox(
-                quickAction = quickAction
-            ) //Render info boxes with data
+                project = project,
+                onProjectClickListener = { selectedProject ->
+                    navController.navigate("projectDetails/${selectedProject.id}") // ✅ Unique click action
+                }
+            )
         }
     }
 

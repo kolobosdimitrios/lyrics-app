@@ -9,8 +9,7 @@ data class ProjectWithBarsRelationEntity(
     @Embedded val projectDto: ProjectDto,
     @Relation(
         parentColumn = "id",
-        entityColumn = "projectId"
+        entityColumn = "project_id" // ✅ FIXED: Use actual property name, NOT column name
     )
     val bars: List<BarDto>
-) {
-}
+)

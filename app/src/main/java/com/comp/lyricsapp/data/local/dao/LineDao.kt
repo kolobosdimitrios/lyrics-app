@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface LineDao {
 
     @Delete
-    suspend fun deleteBarLines(lines: List<Long>, barId: Long)
+    suspend fun deleteBarLines(lines: List<LineDto>)
 
     @Update
     suspend fun updateLine(newLineDto: LineDto)

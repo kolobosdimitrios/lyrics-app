@@ -9,8 +9,7 @@ data class BarWithLinesRelationEntity(
     @Embedded val bar: BarDto,
     @Relation(
         parentColumn = "id",
-        entityColumn = "barId"
+        entityColumn = "bar_id" // ✅ FIXED: Use actual property name, NOT column name
     )
-    val lines: List<LineDto>
-) {
-}
+    val barLines: List<LineDto>
+)

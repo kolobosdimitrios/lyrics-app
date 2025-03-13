@@ -4,12 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "project_table")
+@Entity(tableName = "projects") // ✅ FIXED: Table name should match DAO queries
 data class ProjectDto(
-    @PrimaryKey(true)
+    @PrimaryKey(autoGenerate = true) // ✅ FIXED: Correct `@PrimaryKey` usage
     val id: Long,
-    @ColumnInfo("title")
+    @ColumnInfo(name = "title")
     val title: String,
-    @ColumnInfo("timestamp")
+    @ColumnInfo(name = "project_timestamp")
     val timestamp: String
 )

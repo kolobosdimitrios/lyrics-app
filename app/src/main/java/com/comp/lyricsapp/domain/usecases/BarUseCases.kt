@@ -74,8 +74,6 @@ class GetBarLinesUseCase(repository: BarRepositoryImpl): BarUseCases<Long, Flow<
     }
 
     override fun invokeSync(input: Long): Flow<List<Line>> {
-        return repository.getBarWithLines(input).map { it.lines }
+        return repository.getBarWithLines(input).map { it.barLines }
     }
-
-
 }

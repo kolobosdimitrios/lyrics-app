@@ -23,33 +23,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideContext(@ApplicationContext context: Context): Context = context
-
-
-
-    @Singleton
-    @Provides
-    fun provideLocalProjectRepository(projectDAO: ProjectDAO) : LocalProjectRepository {
-        return LocalProjectRepository(projectDAO)
-    }
-
-
-    @Singleton
-    @Provides
-    fun provideRemoteProjectRepository(projectApi: ProjectApi): RemoteProjectRepository {
-        return RemoteProjectRepository(projectApi)
-    }
-
-    @Singleton
-    @Provides
-    fun provideProjectRepository(
-        localProjectRepository: LocalProjectRepository,
-        remoteProjectRepository: RemoteProjectRepository
-    ) : ProjectRepositoryImpl {
-        return ProjectRepositoryImpl(
-            localProjectRepository = localProjectRepository,
-            remoteProjectRepository = remoteProjectRepository
-        )
-    }
+    
 
 
 }

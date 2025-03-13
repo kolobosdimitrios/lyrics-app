@@ -27,11 +27,11 @@ interface BarDao {
     suspend fun updateBar(updatedBar: BarDto)
 
     @Transaction
-    @Query("DELETE  FROM bars WHERE projectId = :projectId AND id in (:barIds)")
+    @Query("DELETE  FROM bars WHERE project_id = :projectId AND id in (:barIds)")
     suspend fun deleteProjectBars(projectId: Long, barIds: List<Long>)
 
     @Transaction
-    @Query("DELETE FROM BARS WHERE projectId = :projectId")
+    @Query("DELETE FROM BARS WHERE project_id = :projectId")
     suspend fun deleteAllProjectBars(projectId: Long)
 
 

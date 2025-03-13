@@ -15,7 +15,7 @@ class RemoteLineRepository(private val lineApi: LineApi): LineRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteBarLines(barId: Long, barLines: List<Long>) {
+    override suspend fun deleteBarLines(barLines: List<Line>) {
         TODO("Not yet implemented")
     }
 

@@ -1,6 +1,7 @@
 package com.comp.lyricsapp.domain.usecases
 
 import com.comp.lyricsapp.data.repo.LineRepositoryImpl
+import com.comp.lyricsapp.domain.entities.BarWithLines
 import com.comp.lyricsapp.domain.entities.Line
 import kotlinx.coroutines.runBlocking
 
@@ -40,15 +41,14 @@ class UpdateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>
 }
 
 
-class DeleteBarLineUseCase(repository: LineRepositoryImpl): LineUseCase<BarLineIds ,Unit>(repository){
-    override suspend fun invokeSuspend(input: BarLineIds) {
+class DeleteBarLineUseCase(repository: LineRepositoryImpl): LineUseCase<BarWithLines ,Unit>(repository){
+    override suspend fun invokeSuspend(input: BarWithLines) {
         repository.deleteBarLines(
-            input.barId,
-            listOf(input.lineId)
+            barLines = input.barLines
         )
     }
 
-    override fun invokeSync(input: BarLineIds) {
+    override fun invokeSync(input: BarWithLines) {
         throw IllegalStateException("Deletion is a suspended operation.")
     }
 

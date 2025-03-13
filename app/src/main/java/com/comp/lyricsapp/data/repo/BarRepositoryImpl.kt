@@ -6,8 +6,9 @@ import com.comp.lyricsapp.domain.entities.Bar
 import com.comp.lyricsapp.domain.entities.BarWithLines
 import com.comp.lyricsapp.domain.repositories.BarRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class BarRepositoryImpl(
+class BarRepositoryImpl @Inject constructor(
     private val localBarRepository: LocalBarRepository,
     private val remoteBarRepository: RemoteBarRepository
 ): BarRepository {

@@ -9,8 +9,9 @@ import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import com.comp.lyricsapp.domain.repositories.ProjectRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class ProjectRepositoryImpl(
+class ProjectRepositoryImpl @Inject constructor(
     private val localProjectRepository: LocalProjectRepository,
     private val remoteProjectRepository: RemoteProjectRepository
 ): ProjectRepository {

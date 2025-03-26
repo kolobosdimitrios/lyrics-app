@@ -1,8 +1,6 @@
 package com.comp.lyricsapp.presentation.screens.project
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,13 +29,10 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.comp.lyricsapp.domain.entities.Bar
-import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.presentation.theme.Typography
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
 import com.comp.lyricsapp.presentation.view_models.LineViewModel
@@ -59,7 +54,7 @@ fun ProjectScreen(
     val focusRequester = remember { FocusRequester() } // Focus controller
 
     val savedProjectWithBars by projectViewModel.selectedProjectWithBars.collectAsState()
-    var projectLines by remember { mutableStateOf<List<Line>>(emptyList()) } // ✅ MutableState for recomposition
+    var projectBars by remember { mutableStateOf<List<Bar>>(emptyList()) } // ✅ MutableState for recomposition
 
 
     LaunchedEffect(projectId) {
@@ -72,10 +67,7 @@ fun ProjectScreen(
     LaunchedEffect(savedProjectWithBars) {
         savedProjectWithBars?.let { projectWithBars ->
             projectTitle = projectWithBars.project.title
-            val bars = projectWithBars.bars
-            for(bar: Bar in bars){
-
-            }
+            projectBars = projectWithBars.bars
         }
     }
 
@@ -143,7 +135,7 @@ fun ProjectScreen(
         Box(
             modifier = Modifier.padding(innerPadding)
         ) {
-
+            WorkBoard(projectBars, barViewModel)
         }
     }
 }

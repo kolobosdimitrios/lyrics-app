@@ -15,7 +15,7 @@ import com.comp.lyricsapp.data.model.ProjectDto
         LineDto::class,
         BarDto::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class MainDatabase : RoomDatabase() {

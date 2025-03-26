@@ -1,5 +1,6 @@
 package com.comp.lyricsapp.presentation.navigation
 
+import android.accessibilityservice.AccessibilityService.ScreenshotResult
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
@@ -25,6 +26,10 @@ fun Navigation(){
         composable(route = "${ Screen.Project.route }/{projectId}"){ backStackEntry ->
             val projectId = backStackEntry.arguments?.getString("projectId")?.toLongOrNull()
             ProjectScreen(navController, projectId)
+        }
+
+        composable(route = Screen.Project.route){
+            ProjectScreen(navController, null)
         }
 
     }

@@ -7,6 +7,7 @@ import com.comp.lyricsapp.domain.entities.Bar
 import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.domain.usecases.BarUseCasesContainer
 import com.comp.lyricsapp.domain.usecases.ProjectBarIds
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class BarViewModel @Inject constructor(
     private val barUseCasesContainer: BarUseCasesContainer
 ): ViewModel() {

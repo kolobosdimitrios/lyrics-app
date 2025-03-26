@@ -7,9 +7,11 @@ import com.comp.lyricsapp.domain.entities.BarWithLines
 import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.domain.usecases.BarLineIds
 import com.comp.lyricsapp.domain.usecases.LineUseCasesContainer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class LineViewModel @Inject constructor(
     private val lineUseCasesContainer: LineUseCasesContainer
 ): ViewModel() {

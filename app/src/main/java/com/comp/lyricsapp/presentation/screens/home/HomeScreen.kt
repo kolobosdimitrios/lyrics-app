@@ -40,7 +40,8 @@ fun HomeScreen(navController: NavController) {
                 getString(
                     LocalContext.current,
                     R.string.app_name
-                )
+                ),
+                navController
             )
         }
     ) { innerPadding ->
@@ -53,10 +54,8 @@ fun HomeScreen(navController: NavController) {
 
 }
 
-@Preview(showBackground = true)
 @Composable
-fun TopBar(appTitle: String = "Lyrics") {
-    val navController = rememberNavController()
+fun TopBar(appTitle: String = "Lyrics", navController: NavController) {
 
     MyAppTheme {
         TopAppBar(

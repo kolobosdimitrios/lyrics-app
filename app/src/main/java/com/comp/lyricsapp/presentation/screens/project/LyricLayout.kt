@@ -42,3 +42,4 @@ fun LyricLine(lyric: Line, onClick: () -> Unit){
 
 }
 
+

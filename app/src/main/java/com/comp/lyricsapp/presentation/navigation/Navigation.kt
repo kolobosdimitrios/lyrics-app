@@ -15,6 +15,7 @@ fun Navigation(){
 
     val navController = rememberNavController()
 
+
     NavHost(navController = navController, startDestination = Screen.Home.route){
         /*
          *  Add all composable endpoints of the apps aka Screens.

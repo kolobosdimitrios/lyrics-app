@@ -1,6 +1,7 @@
 package com.comp.lyricsapp.presentation.screens.project
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -135,7 +136,10 @@ fun ProjectScreen(
         Box(
             modifier = Modifier.padding(innerPadding)
         ) {
-            WorkBoard(projectBars, barViewModel)
+            Column {
+                StandaloneBar(barViewModel, lineViewModel)
+            }
+//            WorkBoard(projectBars, barViewModel)
         }
     }
 }

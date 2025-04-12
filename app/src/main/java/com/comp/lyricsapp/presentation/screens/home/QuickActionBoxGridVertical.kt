@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.presentation.navigation.Screen
 
 @Composable
 fun QuickActionBoxGridVertical(navController: NavController, projects: List<Project>){
@@ -25,10 +26,10 @@ fun QuickActionBoxGridVertical(navController: NavController, projects: List<Proj
 
         items(projects) {project ->
              //Render info boxes with data
-            QuickActionBox(
+            ProjectBox(
                 project = project,
                 onProjectClickListener = { selectedProject ->
-                    navController.navigate("projectDetails/${selectedProject.id}") // ✅ Unique click action
+                    navController.navigate(Screen.Project.route +"/${selectedProject.id}") // ✅ Unique click action
                 }
             )
         }

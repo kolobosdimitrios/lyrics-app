@@ -14,7 +14,7 @@ import com.comp.lyricsapp.domain.entities.Project
 import com.comp.lyricsapp.presentation.navigation.Screen
 
 @Composable
-fun QuickActionBoxGridVertical(navController: NavController, projects: List<Project>){
+fun ProjectBoxesGridVertical(navController: NavController, projects: List<Project>){
 
     LazyVerticalStaggeredGrid(
 

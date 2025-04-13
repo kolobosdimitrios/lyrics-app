@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.comp.lyricsapp.domain.entities.Project
-import com.comp.lyricsapp.data.local.repo.LocalProjectRepository
 import com.comp.lyricsapp.domain.entities.ProjectWithBars
 import com.comp.lyricsapp.domain.usecases.ProjectUseCasesContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,20 +30,38 @@ class ProjectViewModel @Inject constructor(
         emptyList()
     )
 
-    private val _selectedProject = MutableStateFlow<ProjectWithBars?>(null)  // Holds the selected project
-    val selectedProjectWithBars: StateFlow<ProjectWithBars?> = _selectedProject.asStateFlow()
+    private val _selectedProjectWithBars = MutableStateFlow<ProjectWithBars?>(null)  // Holds the selected project
+    val selectedProjectWithBars: StateFlow<ProjectWithBars?> = _selectedProjectWithBars.asStateFlow()
+
+    private val _selectedProject = MutableStateFlow<Project?>(null)  // Holds the selected project
+    val selectedProject: StateFlow<Project?> = _selectedProject.asStateFlow()
 
     fun getProjectWithBars(projectId: Long) {
         viewModelScope.launch {
             projectUseCases.getProjectWithBarsUseCase(projectId, false)
                 .catch { e ->
                     Log.e("ProjectViewModel", "Error fetching project: ${e.message}")
+                    _selectedProjectWithBars.value = null
+                }
+                .collect{
+                    projectWithBars -> _selectedProjectWithBars.value = projectWithBars
+                }
+        }
+    }
+
+    fun getProject(projectId: Long){
+
+        viewModelScope.launch {
+            projectUseCases.getProjectUseCase(projectId, async = false)
+                .catch { e ->
+                    Log.e("ProjectViewModel", "Error fetching project: ${e.message}")
                     _selectedProject.value = null
                 }
                 .collect{
-                    projectWithBars -> _selectedProject.value = projectWithBars
+                    project -> _selectedProject.value = project
                 }
         }
+
     }
 
     fun createProject(project: Project){

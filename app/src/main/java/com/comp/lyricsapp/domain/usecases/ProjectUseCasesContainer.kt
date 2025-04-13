@@ -5,6 +5,7 @@ data class ProjectUseCasesContainer(
     val updateProjectUseCase: UpdateProjectUseCase,
     val deleteProjectUseCase: DeleteProjectUseCase,
     val getAllProjectsUseCase: GetAllProjectsUseCase,
-    val getProjectWithBarsUseCase: GetProjectWithBarsUseCase
+    val getProjectWithBarsUseCase: GetProjectWithBarsUseCase,
+    val getProjectUseCase: GetProjectUseCase
 ) {
 }

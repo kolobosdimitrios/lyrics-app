@@ -23,6 +23,10 @@ interface BarDao {
     @Query("SELECT * FROM bars WHERE id = :barId")
     fun getBarWithLines(barId: Long) : Flow<BarWithLinesRelationEntity>
 
+    @Transaction
+    @Query("SELECT * FROM bars WHERE id in (:barIds)")
+    fun getBarsWithLines(barIds: Array<Long>) : Flow<List<BarWithLinesRelationEntity>>
+
     @Update
     suspend fun updateBar(updatedBar: BarDto)
 

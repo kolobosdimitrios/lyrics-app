@@ -77,3 +77,15 @@ class GetProjectWithBarsUseCase(repository: ProjectRepositoryImpl): ProjectUseCa
     }
 
 }
+
+class GetProjectUseCase(repository: ProjectRepositoryImpl): ProjectUseCase<Long, Flow<Project?>>(repository){
+    override suspend fun invokeSuspend(input: Long): Flow<Project> {
+        TODO("Not yet implemented")
+    }
+
+    override fun invokeSync(input: Long): Flow<Project?> {
+        return repository.getProject(input)
+    }
+
+
+}

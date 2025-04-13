@@ -1,8 +1,9 @@
 package com.comp.lyricsapp.presentation.screens.project
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -34,10 +35,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.comp.lyricsapp.domain.entities.Bar
+import com.comp.lyricsapp.domain.entities.Line
+import com.comp.lyricsapp.presentation.theme.LightPrimary
 import com.comp.lyricsapp.presentation.theme.Typography
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
 import com.comp.lyricsapp.presentation.view_models.LineViewModel
 import com.comp.lyricsapp.presentation.view_models.ProjectViewModel
+import com.comp.lyricsapp.utils.formatTimestamp
 
 @Composable
 fun ProjectScreen(
@@ -55,8 +59,8 @@ fun ProjectScreen(
     val focusRequester = remember { FocusRequester() } // Focus controller
 
     val savedProjectWithBars by projectViewModel.selectedProjectWithBars.collectAsState()
-    var projectBars by remember { mutableStateOf<List<Bar>>(emptyList()) } // ✅ MutableState for recomposition
 
+    var projectBars by remember { mutableStateOf<List<Bar>>(emptyList()) }
 
     LaunchedEffect(projectId) {
         projectId?.let { id ->
@@ -66,9 +70,9 @@ fun ProjectScreen(
 
     // ✅ Keeps the UI updated when the project state changes
     LaunchedEffect(savedProjectWithBars) {
-        savedProjectWithBars?.let { projectWithBars ->
-            projectTitle = projectWithBars.project.title
-            projectBars = projectWithBars.bars
+        savedProjectWithBars?.let {
+            projectTitle = it.project.title
+            projectBars = it.bars
         }
     }
 
@@ -102,9 +106,9 @@ fun ProjectScreen(
 
                                 IconButton(
                                     onClick = {
-                                        savedProjectWithBars?.project?.let {
-                                            it.title = savedProjectTitle
-                                            projectViewModel.updateProject(it)
+                                        savedProjectWithBars?.let {
+                                            it.project.title = savedProjectTitle
+                                            projectViewModel.updateProject(it.project)
                                         }
                                         keyboardController?.hide()
                                         focusManager.clearFocus()
@@ -131,17 +135,109 @@ fun ProjectScreen(
 
                 }
             )
+        },
+        bottomBar = {
+            var newStandaloneLines by remember { mutableStateOf(listOf<String>()) }
+            LineBottomEditor(
+                onSave = {
+                    projectId?.let {
+                        barViewModel.createBar(Bar(0, projectId), onResult = { result ->
+                            newStandaloneLines.forEach { line ->
+                                lineViewModel.createLine(
+                                    Line(
+                                        id = 0,
+                                        barId = result.data,
+                                        line = line,
+                                        timestamp = formatTimestamp(System.currentTimeMillis())
+                                    )
+                                )
+                            }
+
+                        })
+                    }
+                },
+                onLineAdded = { line ->
+                    newStandaloneLines += line
+                }
+            )
         }
     ){ innerPadding ->
         Box(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding).fillMaxSize()
         ) {
-            Column {
-                StandaloneBar(barViewModel, lineViewModel)
-            }
-//            WorkBoard(projectBars, barViewModel)
+            ProjectWorkBoardWorkBoard(
+                projectBars = projectBars
+            )
         }
     }
 }
 
+@Composable
+fun LineBottomEditor(
+    onSave: () -> Unit,
+    onLineAdded: (String) -> Unit
+){
 
+    var newStandaloneLine by remember { mutableStateOf("") }
+
+    val focusManager = LocalFocusManager.current  // Manages focus
+    val keyboardController = LocalSoftwareKeyboardController.current  // Manages keyboard
+    val focusRequester = remember { FocusRequester() } // Focus controller
+
+    TextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .focusRequester(focusRequester)
+        ,
+        value = newStandaloneLine,
+        onValueChange = {
+                newValue -> newStandaloneLine = newValue
+        },
+        placeholder = { Text("Hit it", style = Typography.body2, color = Color.White) },
+        singleLine = false,
+        textStyle = Typography.body2,
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done
+        ),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = LightPrimary,
+            textColor = Color.White,
+            cursorColor = Color.White,
+            focusedIndicatorColor = LightPrimary,  // 👈 Removes line when focused
+            unfocusedIndicatorColor = Color.Transparent // 👈 Removes line when unfocused
+
+        ),
+        keyboardActions = KeyboardActions(onDone = {
+            onLineAdded(newStandaloneLine)
+            newStandaloneLine = ""
+            focusManager.clearFocus()  // Remove focus from TextField
+            keyboardController?.hide()  // Hide keyboard
+        }),
+        trailingIcon = {
+            IconButton(
+                onClick = {
+                    onLineAdded(newStandaloneLine)
+                    newStandaloneLine = ""
+                    focusManager.clearFocus()  // Move focus to TextField
+                    keyboardController?.hide()
+                    onSave()
+                }
+            ) {
+                Icon(imageVector = Icons.Default.Save, contentDescription = "Save lines", tint = Color.White)
+            }
+        }
+    )
+}
+
+@Composable
+fun ProjectWorkBoardWorkBoard(
+    projectBars: List<Bar>
+){
+
+    Log.d("WorkBoard", projectBars.toString())
+    val barIds = projectBars.map { it.id }
+    BarContainer(
+        barIds = barIds.toTypedArray()
+    )
+
+}

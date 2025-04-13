@@ -13,6 +13,8 @@ import com.comp.lyricsapp.domain.usecases.DeleteProjectBars
 import com.comp.lyricsapp.domain.usecases.DeleteProjectUseCase
 import com.comp.lyricsapp.domain.usecases.GetAllProjectsUseCase
 import com.comp.lyricsapp.domain.usecases.GetBarLinesUseCase
+import com.comp.lyricsapp.domain.usecases.GetBarsLinesUseCase
+import com.comp.lyricsapp.domain.usecases.GetProjectUseCase
 import com.comp.lyricsapp.domain.usecases.GetProjectWithBarsUseCase
 import com.comp.lyricsapp.domain.usecases.LineUseCasesContainer
 import com.comp.lyricsapp.domain.usecases.ProjectUseCasesContainer
@@ -37,7 +39,8 @@ object UseCasesModule {
             updateProjectUseCase = UpdateProjectUseCase(repositoryImpl),
             deleteProjectUseCase = DeleteProjectUseCase(repositoryImpl),
             getAllProjectsUseCase = GetAllProjectsUseCase(repositoryImpl),
-            getProjectWithBarsUseCase = GetProjectWithBarsUseCase(repositoryImpl)
+            getProjectWithBarsUseCase = GetProjectWithBarsUseCase(repositoryImpl),
+            getProjectUseCase = GetProjectUseCase(repositoryImpl)
         )
     }
 
@@ -59,7 +62,8 @@ object UseCasesModule {
             updateBarUseCase = UpdateBar(repository),
             deleteProjectBar = DeleteProjectBar(repository),
             deleteProjectBars = DeleteProjectBars(repository),
-            getBarLinesUseCase = GetBarLinesUseCase(repository)
+            getBarLinesUseCase = GetBarLinesUseCase(repository),
+            getBarsLinesUseCase = GetBarsLinesUseCase(repository)
         )
     }
 }

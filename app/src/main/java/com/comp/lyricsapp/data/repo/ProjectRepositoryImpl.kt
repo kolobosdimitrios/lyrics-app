@@ -25,6 +25,10 @@ class ProjectRepositoryImpl @Inject constructor(
         return localProjectRepository.getProjectWithBars(id)
     }
 
+    override fun getProject(id: Long): Flow<Project?> {
+        return localProjectRepository.getProject(id)
+    }
+
     override suspend fun update(updatedProject: Project) {
         localProjectRepository.update(updatedProject)
     }

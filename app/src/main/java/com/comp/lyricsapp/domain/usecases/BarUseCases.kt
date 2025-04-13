@@ -2,6 +2,7 @@ package com.comp.lyricsapp.domain.usecases
 
 import com.comp.lyricsapp.data.repo.BarRepositoryImpl
 import com.comp.lyricsapp.domain.entities.Bar
+import com.comp.lyricsapp.domain.entities.BarWithLines
 import com.comp.lyricsapp.domain.entities.Line
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,12 +19,12 @@ abstract sealed class BarUseCases<I, O>(protected val repository: BarRepositoryI
     }
 }
 
-class CreateBar(repository: BarRepositoryImpl): BarUseCases<Bar, Unit>(repository){
-    override suspend fun invokeSuspend(input: Bar) {
-        repository.createBar(input)
+class CreateBar(repository: BarRepositoryImpl): BarUseCases<Bar, Long>(repository){
+    override suspend fun invokeSuspend(input: Bar): Long {
+        return repository.createBar(input)
     }
 
-    override fun invokeSync(input: Bar) {
+    override fun invokeSync(input: Bar): Long {
         throw IllegalStateException("Creation is a suspend operation!")
     }
 
@@ -75,5 +76,15 @@ class GetBarLinesUseCase(repository: BarRepositoryImpl): BarUseCases<Long, Flow<
 
     override fun invokeSync(input: Long): Flow<List<Line>> {
         return repository.getBarWithLines(input).map { it.barLines }
+    }
+}
+
+class GetBarsLinesUseCase(repository: BarRepositoryImpl): BarUseCases<Array<Long>, Flow<List<BarWithLines>>>(repository){
+    override suspend fun invokeSuspend(input: Array<Long>): Flow<List<BarWithLines>> {
+        throw IllegalStateException("Delete is not a suspend operation!")
+    }
+
+    override fun invokeSync(input: Array<Long>): Flow<List<BarWithLines>> {
+        return repository.getBarsWithLines(input)
     }
 }

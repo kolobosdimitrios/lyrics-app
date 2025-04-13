@@ -1,8 +1,6 @@
 package com.comp.lyricsapp.presentation.navigation
 
-import android.accessibilityservice.AccessibilityService.ScreenshotResult
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,9 +27,6 @@ fun Navigation(){
             ProjectScreen(navController, projectId)
         }
 
-        composable(route = Screen.Project.route){
-            ProjectScreen(navController, null)
-        }
 
     }
 

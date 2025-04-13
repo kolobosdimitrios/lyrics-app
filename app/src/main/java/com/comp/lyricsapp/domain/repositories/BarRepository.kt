@@ -13,7 +13,9 @@ interface BarRepository {
 
     suspend fun deleteAllProjectBars(projectId: Long)
 
-    suspend fun createBar(bar: Bar)
+    suspend fun createBar(bar: Bar): Long
 
     fun getBarWithLines(barId: Long): Flow<BarWithLines>
+
+    fun getBarsWithLines(barIds: Array<Long>): Flow<List<BarWithLines>>
 }

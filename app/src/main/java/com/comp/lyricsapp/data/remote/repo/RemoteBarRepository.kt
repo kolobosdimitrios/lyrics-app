@@ -20,11 +20,15 @@ class RemoteBarRepository(private val barApi: BarApi): BarRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun createBar(bar: Bar) {
+    override suspend fun createBar(bar: Bar) : Long {
         TODO("Not yet implemented")
     }
 
     override fun getBarWithLines(barId: Long): Flow<BarWithLines> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getBarsWithLines(barIds: Array<Long>): Flow<List<BarWithLines>> {
         TODO("Not yet implemented")
     }
 }

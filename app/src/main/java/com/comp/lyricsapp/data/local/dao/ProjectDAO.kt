@@ -33,6 +33,6 @@ interface ProjectDAO {
     suspend fun deleteProject(project: ProjectDto)
 
     @Transaction
-    @Query("SELECT * FROM BARS, PROJECTS WHERE project_id = :projectId")
+    @Query("SELECT * FROM  PROJECTS WHERE id = :projectId")
     fun getProjectWithBars(projectId: Long): Flow<ProjectWithBarsRelationEntity>
 }

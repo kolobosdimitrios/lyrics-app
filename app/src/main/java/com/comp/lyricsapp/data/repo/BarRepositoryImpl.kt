@@ -25,11 +25,15 @@ class BarRepositoryImpl @Inject constructor(
         localBarRepository.deleteAllProjectBars(projectId)
     }
 
-    override suspend fun createBar(bar: Bar) {
-        localBarRepository.createBar(bar)
+    override suspend fun createBar(bar: Bar): Long {
+        return localBarRepository.createBar(bar)
     }
 
     override fun getBarWithLines(barId: Long): Flow<BarWithLines> {
         return localBarRepository.getBarWithLines(barId)
+    }
+
+    override fun getBarsWithLines(barIds: Array<Long>): Flow<List<BarWithLines>> {
+        return localBarRepository.getBarsWithLines(barIds)
     }
 }

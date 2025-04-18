@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.presentation.theme.Typography
@@ -33,6 +34,29 @@ fun LineContainer(lyric: Line, onClick: () -> Unit){
                 .wrapContentSize(align = Alignment.Center)
                 .padding(5.dp),
             style = Typography.body2
+        )
+    }
+
+}
+
+
+@Composable
+fun LineEditorContainer(line: String, onClick: () -> Unit){
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp)
+            .clickable(onClick = onClick, enabled = true)
+
+    ) {
+        Text(
+            text = line,
+            Modifier
+                .wrapContentSize(align = Alignment.Center)
+                .padding(8.dp),
+            style = Typography.body2,
+            color = Color.White
         )
     }
 

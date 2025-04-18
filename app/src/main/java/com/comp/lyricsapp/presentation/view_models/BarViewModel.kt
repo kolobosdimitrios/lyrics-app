@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.comp.lyricsapp.domain.entities.Bar
 import com.comp.lyricsapp.domain.entities.BarWithLines
-import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.domain.usecases.BarUseCasesContainer
 import com.comp.lyricsapp.domain.usecases.ProjectBarIds
 import com.comp.lyricsapp.utils.ViewModelResult

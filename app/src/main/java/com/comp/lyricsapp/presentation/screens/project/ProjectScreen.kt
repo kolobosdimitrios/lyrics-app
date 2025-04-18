@@ -178,7 +178,8 @@ fun ProjectScreen(
 fun LineBottomEditor(
     onCreateBar: () -> Unit,
     onAddLineToBar: (String) -> Unit
-    ){
+    )
+{
 
     var newStandaloneLine by remember { mutableStateOf("") }
 
@@ -186,65 +187,57 @@ fun LineBottomEditor(
     val keyboardController = LocalSoftwareKeyboardController.current  // Manages keyboard
     val focusRequester = remember { FocusRequester() } // Focus controller
 
-    Column(
+    TextField(
         modifier = Modifier
-            .padding(8.dp)
             .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
+            .focusRequester(focusRequester)
+            .padding(horizontal = 8.dp)
 
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(focusRequester)
-                .padding(horizontal = 8.dp)
+        ,
+        value = newStandaloneLine,
+        onValueChange = {
+                newValue -> newStandaloneLine = newValue
+        },
+        placeholder = { Text("Hit it", style = Typography.body2, color = LightPrimary) },
+        singleLine = false,
+        textStyle = Typography.body2,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White,
+            textColor = LightPrimary,
+            cursorColor = LightPrimary,
+            focusedIndicatorColor = Color.White,  // 👈 Removes line when focused
+            unfocusedIndicatorColor = LightPrimary
 
-            ,
-            value = newStandaloneLine,
-            onValueChange = {
-                    newValue -> newStandaloneLine = newValue
-            },
-            placeholder = { Text("Hit it", style = Typography.body2, color = LightPrimary) },
-            singleLine = false,
-            textStyle = Typography.body2,
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.White,
-                textColor = LightPrimary,
-                cursorColor = LightPrimary,
-                focusedIndicatorColor = Color.White,  // 👈 Removes line when focused
-                unfocusedIndicatorColor = LightPrimary
+        ),
+        trailingIcon = {
+            Row {
 
-            ),
-            trailingIcon = {
-                Row {
-
-                    //Add Line to bar
-                    IconButton(
-                        onClick = {
-                            newStandaloneLine.isNotBlank().let {
-                                onAddLineToBar(newStandaloneLine)
-                                newStandaloneLine = ""
-                                focusManager.clearFocus()  // Move focus to TextField
-                                keyboardController?.hide()
-                            }
+                //Add Line to bar
+                IconButton(
+                    onClick = {
+                        newStandaloneLine.isNotBlank().let {
+                            onAddLineToBar(newStandaloneLine)
+                            newStandaloneLine = ""
+                            focusManager.clearFocus()  // Move focus to TextField
+                            keyboardController?.hide()
                         }
-                    ) {
-                        Icon(imageVector = Icons.Default.ArrowUpward, contentDescription = "Save lines", tint = LightPrimary)
                     }
-
-                    //Create new Bar to work with
-                    IconButton(
-                        onClick = {
-                            onCreateBar()
-                        }
-                    ) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Save lines", tint = LightPrimary)
-                    }
+                ) {
+                    Icon(imageVector = Icons.Default.ArrowUpward, contentDescription = "Save lines", tint = LightPrimary)
                 }
 
+                //Create new Bar to work with
+                IconButton(
+                    onClick = {
+                        onCreateBar()
+                    }
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "Save lines", tint = LightPrimary)
+                }
             }
-        )
-    }
+
+        }
+    )
 
 
 }

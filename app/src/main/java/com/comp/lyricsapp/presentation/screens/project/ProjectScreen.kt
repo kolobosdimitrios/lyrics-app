@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -193,6 +195,13 @@ fun LineBottomEditor(
             .wrapContentHeight()
     ) {
 
+        Text(
+            text = "Bars hold lines. Use '+' for a new bar and \u2191 to add a line.",
+            style = Typography.body2,
+            color = LightPrimary,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        )
+
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -214,35 +223,53 @@ fun LineBottomEditor(
                 focusedIndicatorColor = Color.White,  // 👈 Removes line when focused
                 unfocusedIndicatorColor = LightPrimary
 
-            ),
-            trailingIcon = {
-                Row {
+            )
 
-                    //Add Line to bar
-                    IconButton(
-                        onClick = {
-                            newStandaloneLine.isNotBlank().let {
-                                onAddLineToBar(newStandaloneLine)
-                                newStandaloneLine = ""
-                                focusManager.clearFocus()  // Move focus to TextField
-                                keyboardController?.hide()
-                            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton(
+                    onClick = {
+                        if (newStandaloneLine.isNotBlank()) {
+                            onAddLineToBar(newStandaloneLine)
+                            newStandaloneLine = ""
+                            focusManager.clearFocus()
+                            keyboardController?.hide()
                         }
-                    ) {
-                        Icon(imageVector = Icons.Default.ArrowUpward, contentDescription = "Save lines", tint = LightPrimary)
                     }
-
-                    //Create new Bar to work with
-                    IconButton(
-                        onClick = {
-                            onCreateBar()
-                        }
-                    ) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Save lines", tint = LightPrimary)
-                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowUpward,
+                        contentDescription = "Add line",
+                        tint = LightPrimary
+                    )
                 }
-
+                Text(
+                    text = "Add line",
+                    style = Typography.body2,
+                    color = LightPrimary
+                )
             }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton(onClick = { onCreateBar() }) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "New bar",
+                        tint = LightPrimary
+                    )
+                }
+                Text(
+                    text = "New bar",
+                    style = Typography.body2,
+                    color = LightPrimary
+                )
+            }
+        }
         )
     }
 

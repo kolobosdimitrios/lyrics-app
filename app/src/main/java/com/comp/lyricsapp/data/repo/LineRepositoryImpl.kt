@@ -7,7 +7,7 @@ import com.comp.lyricsapp.domain.repositories.LineRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LineRepositoryImpl @Inject constructor(
+open class LineRepositoryImpl @Inject constructor(
     private val localLineRepository: LocalLineRepository,
     private val remoteLineRepository: RemoteLineRepository
 ): LineRepository {

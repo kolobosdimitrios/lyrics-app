@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.comp.lyricsapp.presentation.components.CustomBox
 import com.comp.lyricsapp.presentation.theme.LightPrimary
 import com.comp.lyricsapp.presentation.theme.LightPrimaryLight
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
@@ -61,23 +64,15 @@ fun BarContainer(
         items(barsWithLines) { barWithLines ->
             val lines = barWithLines.barLines
 
-            val backgroundColor = when (barColor) {
-                1 -> LightPrimary
-                else -> LightPrimaryLight
-            }
+            val backgroundColor = LightPrimary
 
             barColor = 1 - barColor // Toggle between 0 and 1
 
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        color = backgroundColor
-                    )
-            ){
-
-                Column {
+            CustomBox(
+                backgroundColor = MaterialTheme.colors.primary,
+                padding = PaddingValues(0.dp),
+            )
+                { Column {
                     lines.forEach { lineOfBar ->
                         LineContainer(
                             lineOfBar,
@@ -88,7 +83,6 @@ fun BarContainer(
                     }
                 }
             }
-
         }
 
     }

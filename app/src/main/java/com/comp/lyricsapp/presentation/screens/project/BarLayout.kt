@@ -64,10 +64,6 @@ fun BarContainer(
         items(barsWithLines) { barWithLines ->
             val lines = barWithLines.barLines
 
-            val backgroundColor = LightPrimary
-
-            barColor = 1 - barColor // Toggle between 0 and 1
-
             CustomBox(
                 backgroundColor = MaterialTheme.colors.primary,
                 padding = PaddingValues(0.dp),

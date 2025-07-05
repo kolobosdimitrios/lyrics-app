@@ -76,8 +76,12 @@ fun BarContainer(
                     lines.forEach { lineOfBar ->
                         LineContainer(
                             lineOfBar,
-                            onClick = {
-                                Log.d("BarLayout", lineOfBar.toString())
+                            onClick = { clickedLyric ->
+                                Log.d("BarLayout", clickedLyric.toString())
+                                /**
+                                 * Here we can implement the edit.
+                                 * When user clicks in a line we can modify that line in the database.
+                                 */
                             }
                         )
                     }

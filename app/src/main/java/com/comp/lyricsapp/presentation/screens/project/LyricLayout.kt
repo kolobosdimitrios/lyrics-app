@@ -19,13 +19,13 @@ import com.comp.lyricsapp.presentation.theme.Typography
  * color: The color of the layout.
  */
 @Composable
-fun LineContainer(lyric: Line, onClick: () -> Unit){
+fun LineContainer(lyric: Line, onClick: (lyric: Line) -> Unit){
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable(onClick = onClick, enabled = true)
+            .clickable(onClick = { onClick(lyric) }, enabled = true)
 
     ) {
         Text(
@@ -40,26 +40,5 @@ fun LineContainer(lyric: Line, onClick: () -> Unit){
 }
 
 
-@Composable
-fun LineEditorContainer(line: String, onClick: () -> Unit){
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp)
-            .clickable(onClick = onClick, enabled = true)
-
-    ) {
-        Text(
-            text = line,
-            Modifier
-                .wrapContentSize(align = Alignment.Center)
-                .padding(8.dp),
-            style = Typography.body2,
-            color = Color.White
-        )
-    }
-
-}
 
 

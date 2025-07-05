@@ -1,20 +1,23 @@
 package com.comp.lyricsapp.presentation.screens.project
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -24,8 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.comp.lyricsapp.presentation.components.CustomBox
-import com.comp.lyricsapp.presentation.theme.LightPrimary
-import com.comp.lyricsapp.presentation.theme.LightPrimaryLight
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
 
 
@@ -66,25 +67,41 @@ fun BarContainer(
             CustomBox(
                 backgroundColor = MaterialTheme.colors.primary,
                 padding = PaddingValues(0.dp),
-            ) { innerPadding ->
-                Column(modifier = Modifier.padding(innerPadding)) {
-                    if (lines.isEmpty()) {
-                        // Placeholder or info message
+            ) {
 
-                    } else {
-                        lines.forEach { lineOfBar ->
-                            LineContainer(
-                                lineOfBar,
-                                onClick = { clickedLyric ->
-                                    Log.d("BarLayout", clickedLyric.toString())
-                                    /**
-                                     * Here we can implement the edit.
-                                     * When user clicks in a line we can modify that line in the database.
-                                     */
-
-                                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp), // Optional padding inside the box
+                    verticalAlignment = Alignment.Top // or Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
+                        if (lines.isEmpty()) {
+                            androidx.compose.material.Text(
+                                "No lines yet! Add one to get started.",
+                                modifier = Modifier.padding(8.dp)
                             )
+                        } else {
+                            lines.forEach { lineOfBar ->
+                                LineContainer(
+                                    lineOfBar,
+                                    onClick = { clickedLyric -> /* ... */ }
+                                )
+                            }
                         }
+                    }
+
+                    IconButton(
+                        onClick = { /** Delete the bar as a whole*/ },
+                        modifier = Modifier.align(Alignment.Top) // Optional, makes sure button is top-aligned
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = "Add Line"
+                        )
                     }
                 }
             }

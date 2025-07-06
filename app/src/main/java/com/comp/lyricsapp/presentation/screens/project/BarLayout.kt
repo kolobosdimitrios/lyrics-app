@@ -23,7 +23,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.comp.lyricsapp.domain.usecases.ProjectBarIds
 import com.comp.lyricsapp.presentation.components.SwipeToDeleteBox
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
-import com.comp.lyricsapp.presentation.view_models.LineViewModel
 
 
 @Composable
@@ -82,8 +81,8 @@ fun BarContainer(
                     } else {
                         lines.forEach { lineOfBar ->
                             LineContainer(
-                                lineOfBar,
-                                onClick = { clickedLyric -> /* ... */ }
+                                line = lineOfBar,
+                                onClick = { clickedLyric -> /* Update the line */ }
                             )
                         }
                     }

@@ -37,4 +37,10 @@ class LineViewModel @Inject constructor(
             lineUseCasesContainer.deleteBarLineUseCase(barWithLines)
         }
     }
+
+    fun deleteLine(line: Line){
+        viewModelScope.launch {
+            lineUseCasesContainer.deleteLineUseCase(line, true)
+        }
+    }
 }

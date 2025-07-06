@@ -21,6 +21,10 @@ open class LineRepositoryImpl @Inject constructor(
         localLineRepository.updateLine(updatedLine)
     }
 
+    override suspend fun deleteLine(line: Line) {
+        localLineRepository.deleteLine(line)
+    }
+
     override suspend fun deleteBarLines(barLines: List<Line>) {
         localLineRepository.deleteBarLines(barLines)
     }

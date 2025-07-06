@@ -3,11 +3,13 @@ package com.comp.lyricsapp.di
 import com.comp.lyricsapp.data.repo.BarRepositoryImpl
 import com.comp.lyricsapp.data.repo.LineRepositoryImpl
 import com.comp.lyricsapp.data.repo.ProjectRepositoryImpl
+import com.comp.lyricsapp.domain.repositories.LineRepository
 import com.comp.lyricsapp.domain.usecases.BarUseCasesContainer
 import com.comp.lyricsapp.domain.usecases.CreateBar
 import com.comp.lyricsapp.domain.usecases.CreateLineUseCase
 import com.comp.lyricsapp.domain.usecases.CreateProjectUseCase
 import com.comp.lyricsapp.domain.usecases.DeleteBarLineUseCase
+import com.comp.lyricsapp.domain.usecases.DeleteLineUseCase
 import com.comp.lyricsapp.domain.usecases.DeleteProjectBar
 import com.comp.lyricsapp.domain.usecases.DeleteProjectBars
 import com.comp.lyricsapp.domain.usecases.DeleteProjectUseCase
@@ -46,11 +48,12 @@ object UseCasesModule {
 
     @Provides
     @Singleton
-    fun provideLineUseCasesContainer(repository: LineRepositoryImpl): LineUseCasesContainer{
+    fun provideLineUseCasesContainer(repository: LineRepository): LineUseCasesContainer{
         return LineUseCasesContainer(
             createLineUseCase = CreateLineUseCase(repository),
             updateLineUseCase = UpdateLineUseCase(repository),
-            deleteBarLineUseCase = DeleteBarLineUseCase(repository)
+            deleteBarLineUseCase = DeleteBarLineUseCase(repository),
+            deleteLineUseCase = DeleteLineUseCase(repository)
         )
     }
 

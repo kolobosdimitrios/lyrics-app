@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.comp.lyricsapp.data.model.LineDto
+import com.comp.lyricsapp.domain.entities.Line
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,4 +25,7 @@ interface LineDao {
 
     @Insert
     suspend fun insertLine(newLineDto: LineDto)
+
+    @Delete
+    suspend fun deleteLine(line: LineDto)
 }

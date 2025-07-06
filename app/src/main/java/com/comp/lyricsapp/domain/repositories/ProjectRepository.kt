@@ -11,6 +11,8 @@ interface ProjectRepository {
 
     fun getProjectWithBars(id: Long) : Flow<ProjectWithBars>
 
+    fun getProject(id: Long): Flow<Project?>
+
     suspend fun update(updatedProject: Project)
 
     suspend fun deleteAll()

@@ -8,6 +8,8 @@ interface LineRepository {
 
     suspend fun updateLine(updatedLine: Line)
 
+    suspend fun deleteLine(line: Line)
+
     suspend fun deleteBarLines(barLines: List<Line>)
 
     suspend fun createLine(newLine: Line)

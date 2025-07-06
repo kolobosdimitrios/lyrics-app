@@ -5,5 +5,6 @@ data class BarUseCasesContainer(
     val updateBarUseCase: UpdateBar,
     val deleteProjectBar: DeleteProjectBar,
     val deleteProjectBars: DeleteProjectBars,
-    val getBarLinesUseCase: GetBarLinesUseCase
+    val getBarLinesUseCase: GetBarLinesUseCase,
+    val getBarsLinesUseCase: GetBarsLinesUseCase
 )

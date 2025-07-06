@@ -13,5 +13,5 @@ fun ProjectsGrid(
     projectViewModel: ProjectViewModel = hiltViewModel()
 ){
     val projectsList by projectViewModel.projectsList.collectAsState()
-    QuickActionBoxGridVertical(projects = projectsList, navController = navController)
+    ProjectBoxesGridVertical(projects = projectsList, navController = navController)
 }

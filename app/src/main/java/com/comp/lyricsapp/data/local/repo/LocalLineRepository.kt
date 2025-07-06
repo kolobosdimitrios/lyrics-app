@@ -16,6 +16,10 @@ class LocalLineRepository(private val lineDao: LineDao): LineRepository {
         lineDao.updateLine(updatedLine.toDto())
     }
 
+    override suspend fun deleteLine(line: Line) {
+        lineDao.deleteLine(line.toDto())
+    }
+
     override suspend fun deleteBarLines(barLines: List<Line>) {
         lineDao.deleteBarLines(
             lines = barLines.map { it.toDto() }

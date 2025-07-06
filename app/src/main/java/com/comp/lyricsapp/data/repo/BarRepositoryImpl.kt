@@ -8,7 +8,7 @@ import com.comp.lyricsapp.domain.repositories.BarRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class BarRepositoryImpl @Inject constructor(
+open class BarRepositoryImpl @Inject constructor(
     private val localBarRepository: LocalBarRepository,
     private val remoteBarRepository: RemoteBarRepository
 ): BarRepository {
@@ -25,11 +25,15 @@ class BarRepositoryImpl @Inject constructor(
         localBarRepository.deleteAllProjectBars(projectId)
     }
 
-    override suspend fun createBar(bar: Bar) {
-        localBarRepository.createBar(bar)
+    override suspend fun createBar(bar: Bar): Long {
+        return localBarRepository.createBar(bar)
     }
 
     override fun getBarWithLines(barId: Long): Flow<BarWithLines> {
         return localBarRepository.getBarWithLines(barId)
+    }
+
+    override fun getBarsWithLines(barIds: Array<Long>): Flow<List<BarWithLines>> {
+        return localBarRepository.getBarsWithLines(barIds)
     }
 }

@@ -7,7 +7,7 @@ import com.comp.lyricsapp.domain.repositories.LineRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LineRepositoryImpl @Inject constructor(
+open class LineRepositoryImpl @Inject constructor(
     private val localLineRepository: LocalLineRepository,
     private val remoteLineRepository: RemoteLineRepository
 ): LineRepository {
@@ -19,6 +19,10 @@ class LineRepositoryImpl @Inject constructor(
 
     override suspend fun updateLine(updatedLine: Line) {
         localLineRepository.updateLine(updatedLine)
+    }
+
+    override suspend fun deleteLine(line: Line) {
+        localLineRepository.deleteLine(line)
     }
 
     override suspend fun deleteBarLines(barLines: List<Line>) {

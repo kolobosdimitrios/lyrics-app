@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Lyrics</string>
+    <string name="save">Save</string>
+    <string name="create_project">Create New Project\n</string>
+    <string name="project_title_placeholder">Project Title</string>
+    <string name="create">Create</string>
+    <string name="home_screen">Home</string>
 </resources>

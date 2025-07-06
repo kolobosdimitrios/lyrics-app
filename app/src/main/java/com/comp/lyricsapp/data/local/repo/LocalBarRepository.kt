@@ -27,11 +27,15 @@ class LocalBarRepository(private val barDao: BarDao) : BarRepository {
         barDao.deleteAllProjectBars(projectId)
     }
 
-    override suspend fun createBar(bar: Bar) {
-        barDao.insertBar(bar.toDto())
+    override suspend fun createBar(bar: Bar): Long {
+        return barDao.insertBar(bar.toDto())
     }
 
     override fun getBarWithLines(barId: Long): Flow<BarWithLines> {
         return barDao.getBarWithLines(barId).map { it.toDomainEntity() }
+    }
+
+    override fun getBarsWithLines(barIds: Array<Long>): Flow<List<BarWithLines>> {
+        return barDao.getBarsWithLines(barIds).map { list -> list.map { it.toDomainEntity() } }
     }
 }

@@ -3,11 +3,12 @@ package com.comp.lyricsapp.domain.usecases
 import com.comp.lyricsapp.data.repo.LineRepositoryImpl
 import com.comp.lyricsapp.domain.entities.BarWithLines
 import com.comp.lyricsapp.domain.entities.Line
+import com.comp.lyricsapp.domain.repositories.LineRepository
 import kotlinx.coroutines.runBlocking
 
 data class BarLineIds(val barId: Long, val lineId: Long )
 
-sealed abstract class LineUseCase<I,O>(protected val repository: LineRepositoryImpl) {
+sealed abstract class LineUseCase<I,O>(protected val repository: LineRepository) {
     protected abstract suspend fun invokeSuspend(input: I): O
     protected abstract fun invokeSync(input: I): O
 
@@ -17,7 +18,7 @@ sealed abstract class LineUseCase<I,O>(protected val repository: LineRepositoryI
 }
 
 
-class CreateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
+class CreateLineUseCase(repository: LineRepository): LineUseCase<Line, Unit>(repository) {
 
     override suspend fun invokeSuspend(input: Line) {
         repository.createLine(input)
@@ -29,7 +30,7 @@ class CreateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>
 
 }
 
-class UpdateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>(repository) {
+class UpdateLineUseCase(repository: LineRepository): LineUseCase<Line, Unit>(repository) {
 
     override suspend fun invokeSuspend(input: Line) {
         repository.updateLine(input)
@@ -41,7 +42,7 @@ class UpdateLineUseCase(repository: LineRepositoryImpl): LineUseCase<Line, Unit>
 }
 
 
-class DeleteBarLineUseCase(repository: LineRepositoryImpl): LineUseCase<BarWithLines ,Unit>(repository){
+class DeleteBarLineUseCase(repository: LineRepository): LineUseCase<BarWithLines ,Unit>(repository){
     override suspend fun invokeSuspend(input: BarWithLines) {
         repository.deleteBarLines(
             barLines = input.barLines
@@ -49,8 +50,19 @@ class DeleteBarLineUseCase(repository: LineRepositoryImpl): LineUseCase<BarWithL
     }
 
     override fun invokeSync(input: BarWithLines) {
-        throw IllegalStateException("Deletion is a suspended operation.")
+        throw IllegalStateException("Delete bar's lines is a suspended operation.")
     }
 
+}
+
+
+class DeleteLineUseCase(repository: LineRepository): LineUseCase<Line, Unit>(repository){
+    override suspend fun invokeSuspend(input: Line) {
+        repository.deleteLine(line = input)
+    }
+
+    override fun invokeSync(input: Line) {
+        throw IllegalStateException("Delete line is a suspended operation.")
+    }
 
 }

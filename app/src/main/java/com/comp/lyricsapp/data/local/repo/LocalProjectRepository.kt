@@ -26,6 +26,10 @@ class LocalProjectRepository(private val projectDao: ProjectDAO): ProjectReposit
         return projectDao.getProjectWithBars(id).map { it.toDomainEntity() }
     }
 
+    override fun getProject(id: Long): Flow<Project?> {
+       return projectDao.getProject(id).map { it?.toEntity() }
+    }
+
     override suspend fun update(updatedProject: Project) {
         projectDao.updateProject(updatedProject.toDto())
     }

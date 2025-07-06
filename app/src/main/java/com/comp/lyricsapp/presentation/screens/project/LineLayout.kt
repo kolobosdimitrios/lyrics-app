@@ -14,6 +14,9 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.comp.lyricsapp.domain.entities.Line
@@ -28,13 +31,19 @@ import com.comp.lyricsapp.presentation.view_models.LineViewModel
 fun LineContainer(
     lineViewModel: LineViewModel = hiltViewModel(),
     line: Line,
-    onClick: (lyric: Line) -> Unit
+    focusManager: FocusManager,
+    keyboardController: SoftwareKeyboardController?,
+    focusRequester: FocusRequester
 ){
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = { onClick(line) }, enabled = true),
+            .clickable(onClick = {
+                /**
+                 * TODO(Update will be implemented here)
+                 */
+            }, enabled = true),
         verticalAlignment = Alignment.CenterVertically
 
     ) {

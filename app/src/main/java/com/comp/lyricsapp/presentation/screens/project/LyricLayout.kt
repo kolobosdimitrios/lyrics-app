@@ -1,15 +1,19 @@
 package com.comp.lyricsapp.presentation.screens.project
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.presentation.theme.Typography
@@ -21,20 +25,28 @@ import com.comp.lyricsapp.presentation.theme.Typography
 @Composable
 fun LineContainer(lyric: Line, onClick: (lyric: Line) -> Unit){
 
-    Box(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp)
-            .clickable(onClick = { onClick(lyric) }, enabled = true)
+            .clickable(onClick = { onClick(lyric) }, enabled = true),
+        verticalAlignment = Alignment.CenterVertically
 
     ) {
         Text(
             text = lyric.line,
-            Modifier
-                .wrapContentSize(align = Alignment.Center)
-                .padding(5.dp),
+            modifier = Modifier.weight(1f).padding(PaddingValues(start = 16.dp)),
             style = Typography.body2
         )
+
+        IconButton(
+            onClick = { /** Delete the bar as a whole*/ }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Clear,
+                contentDescription = "Delete Line",
+                modifier = Modifier.size(16.dp)
+            )
+        }
     }
 
 }

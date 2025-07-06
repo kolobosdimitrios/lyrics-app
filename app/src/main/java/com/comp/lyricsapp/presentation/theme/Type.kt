@@ -18,7 +18,7 @@ val Typography = Typography(
     body2 = TextStyle(
         fontFamily = fontFamily,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp
+        fontSize = 14.sp
     ),
     h1 = TextStyle(
         fontFamily = fontFamily,

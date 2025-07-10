@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.KeyboardActions
@@ -24,8 +25,11 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowUpward
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,6 +54,7 @@ import androidx.navigation.NavController
 import com.comp.lyricsapp.domain.entities.Bar
 import com.comp.lyricsapp.domain.entities.Line
 import com.comp.lyricsapp.presentation.components.CustomIconButton
+import com.comp.lyricsapp.presentation.navigation.Screen
 import com.comp.lyricsapp.presentation.theme.Typography
 import com.comp.lyricsapp.presentation.view_models.BarViewModel
 import com.comp.lyricsapp.presentation.view_models.LineViewModel
@@ -122,7 +127,7 @@ fun ProjectScreen(
                                     focusManager.clearFocus()
                                 }
                             ) {
-                                Icon(imageVector = Icons.Default.Save, contentDescription = "Save Title")
+                                Icon(Icons.Default.Save, contentDescription = "Save Title", tint = MaterialTheme.colors.onPrimary)
                             }
 
 
@@ -145,6 +150,15 @@ fun ProjectScreen(
                         })
                     )
 
+                },
+                modifier = Modifier.statusBarsPadding(),
+                backgroundColor = MaterialTheme.colors.primary,
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.Home.route)
+                    }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                    }
                 }
             )
         },

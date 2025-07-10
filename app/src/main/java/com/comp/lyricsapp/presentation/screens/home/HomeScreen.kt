@@ -9,15 +9,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +38,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.comp.lyricsapp.R
 import com.comp.lyricsapp.domain.entities.Project
+import com.comp.lyricsapp.presentation.navigation.Screen
 import com.comp.lyricsapp.presentation.theme.Shapes
 import com.comp.lyricsapp.presentation.theme.Typography
 import com.comp.lyricsapp.presentation.view_models.ProjectViewModel
@@ -74,6 +79,17 @@ fun HomeScreen(
                         ) {
                             Icon(imageVector = Icons.Default.Add, contentDescription = "Add new Project")
                         }
+                    }
+                },
+                modifier = Modifier.statusBarsPadding(),
+                backgroundColor = MaterialTheme.colors.primary,
+                navigationIcon = {
+                    IconButton(onClick = {
+                        /**
+                         * Open menu
+                         */
+                    }) {
+                        Icon(Icons.Default.Menu, contentDescription = null)
                     }
                 }
             )

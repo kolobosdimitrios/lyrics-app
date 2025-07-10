@@ -42,3 +42,22 @@ Alternatively, open the project in Android Studio and run the **app** configurat
 - **Hilt** is used for dependency injection. `LyricsApplication` is annotated with `@HiltAndroidApp`, and modules under `di/` provide repositories, databases, and view models.
 
 These libraries simplify state management and navigation in the app.
+
+## Latest Updates
+
+Recent commits introduced several usability improvements:
+
+- Swipe to delete bars in a project.
+- Delete individual lines from a bar.
+- Clear bar contents with a dedicated button.
+- Empty bar containers appear immediately when creating a new bar.
+
+## Running Tests
+
+Execute the unit test suite with:
+
+```bash
+./gradlew test
+```
+
+This runs all repository, mapper and use case tests under `app/src/test`.

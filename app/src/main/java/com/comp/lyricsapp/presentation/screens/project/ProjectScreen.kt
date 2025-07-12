@@ -181,6 +181,7 @@ fun ProjectScreen(
                                 line = newLine,
                                 timestamp = formatTimestamp(System.currentTimeMillis())
                             )
+
                         )
                     }
                 }
@@ -223,7 +224,8 @@ fun BottomEditorView(
             focusRequester = focusRequester,
             onValueChanged = {
                     newLine -> newStandaloneLine = newLine
-            }
+            },
+            newStandaloneLine = newStandaloneLine
         )
 
         Spacer(
@@ -231,9 +233,14 @@ fun BottomEditorView(
         )
 
         UserCommandPaletteView(
-            textState = newStandaloneLine,
-            onAddLineToBar = onAddLineToBar,
-            onCreateBar = onCreateBar
+            onAddLineToBar = {
+                onAddLineToBar(newStandaloneLine)
+                newStandaloneLine = ""
+
+            },
+            onCreateBar = {
+                onCreateBar()
+            }
         )
 
 
@@ -243,9 +250,9 @@ fun BottomEditorView(
 @Composable
 fun BarInputTextView(
     focusRequester: FocusRequester,
-    onValueChanged: (String) -> Unit
+    onValueChanged: (String) -> Unit,
+    newStandaloneLine: String
 ){
-    var newStandaloneLine by remember { mutableStateOf("") }
     TextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -253,7 +260,6 @@ fun BarInputTextView(
             .padding(horizontal = 8.dp),
         value = newStandaloneLine,
         onValueChange = {
-            newStandaloneLine = it
             onValueChanged(it)
         },
         placeholder = { Text("Hit it", style = Typography.body2, color = MaterialTheme.colors.primary) },
@@ -273,8 +279,7 @@ fun BarInputTextView(
 
 @Composable
 fun UserCommandPaletteView(
-    textState: String,
-    onAddLineToBar: (String) -> Unit,
+    onAddLineToBar: () -> Unit,
     onCreateBar: () -> Unit
 ){
     Row(
@@ -290,9 +295,7 @@ fun UserCommandPaletteView(
             title = "Add Line",
             icon = Icons.Default.ArrowUpward,
             onClick = {
-                if(textState.isNotBlank()) {
-                    onAddLineToBar(textState)
-                }
+                onAddLineToBar()
             },
             modifier = Modifier.weight(1f)
         )
